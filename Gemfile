@@ -29,7 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 gem 'figaro'
 gem 'faker'
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 gem 'faraday'
 
 group :development, :test do
