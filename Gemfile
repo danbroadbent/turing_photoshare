@@ -21,7 +21,7 @@ group :development, :test do
   gem 'launchy'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
-  gem 'fabricator'
+  gem 'fabrication'
   gem 'pry-rails'
   gem 'simplecov', require: false
 end
@@ -32,4 +32,4 @@ group :development do
   gem 'better_errors'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
