@@ -16,6 +16,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'google-cloud'
 gem 'carrierwave'
 gem 'fog'
+# gem 'googleauth'
 
 group :development, :test do
   gem 'byebug', platform: :mri
