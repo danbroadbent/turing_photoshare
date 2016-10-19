@@ -1,6 +1,7 @@
 <div class="col-md-6 col-md-offset-3 text-center">
   <h1>Upload Photo</h1>
-  <%= form_for @photo do |f| %>
+  <%= form_for @photo, :html => {:multipart => true} do |f| %>
+    <%= f.hidden_field :album_id, value: params[:album_id] %>
 
     <div class="form-group text-left">
       <%= f.label :caption %>
