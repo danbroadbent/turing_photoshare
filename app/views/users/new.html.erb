@@ -3,22 +3,22 @@
   <%= form_for @user do |f| %>
     <div class="form-group text-left">
       <%= f.label :username %>
-      <%= f.text_field :username, :class => "form-control" %>
+      <%= f.text_field :username, placeholder: "username", :class => "form-control" %>
     </div>
 
     <div class="form-group text-left">
       <%= f.label :phone_number %>
-      <%= f.text_field :phone_number, :class => "form-control" %>
+      <%= f.telephone_field :phone_number, placeholder: "10-digit mobile phone number", :class => "form-control" %>
     </div>
 
     <div class="form-group text-left">
       <%= f.label :password %>
-      <%= f.password_field :password, :class => "form-control" %>
+      <%= f.password_field :password, placeholder: "create password", :class => "form-control" %>
     </div>
 
     <div class="form-group text-left">
       <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, :class => "form-control" %>
+      <%= f.password_field :password_confirmation, placeholder: "confirm password", :class => "form-control" %>
     </div>
 
     <div class=btn-group>
