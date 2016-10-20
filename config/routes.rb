@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
   resources :confirmations, only: [:new, :create]
+  resources :albums, only: [:index, :show, :new, :create]
 end
