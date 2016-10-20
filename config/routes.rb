@@ -3,6 +3,4 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
   resources :confirmations, only: [:new, :create]
-
-  # get '/confirmation', to: 'confirmation#show'
 end
