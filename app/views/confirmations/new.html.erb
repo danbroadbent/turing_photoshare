@@ -3,7 +3,7 @@
   <%= form_tag confirmations_path, method: "post" do %>
     <div class="form-group text-left">
       <%= label_tag :verification_code %>
-      <%= text_field_tag :verification_code, :class => "form-control" %>
+      <%= text_field_tag :verification_code, nil, placeholder: "123456", maxlength: 6, :class => "form-control" %>
     </div>
 
     <div class=btn-group>
