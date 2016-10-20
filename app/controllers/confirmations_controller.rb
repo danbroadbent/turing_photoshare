@@ -1,10 +1,10 @@
 class ConfirmationsController < ApplicationController
   def new
-    @user = User.find(session[:user_id])
+    @user = current_user
   end
 
   def create
-    @user = User.find(session[:user_id])
+    @user = current_user
 
     if @user.verification_code == params[:verification_code]
       # @user.confirm!
