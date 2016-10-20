@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature "user uploads photo" do
-  xscenario "from album page" do
+  scenario "from album page" do
     user = Fabricate(:user)
     album = Fabricate(:album, user_id: user.id)
-    stub_login_user(user)
+    # stub_login_user(user)
     visit album_path(album)
     click_link "Add Photo"
     expect(current_path).to eq(new_photo_path)

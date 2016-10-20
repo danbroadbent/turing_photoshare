@@ -3,7 +3,7 @@
 <%= link_to "Add Photo", new_photo_path(album_id: @album.id) %>
 <% @album.photos.each do |photo| %>
   <div class="photo_tile">
-    <%= photo.user_id %>
+    <%= photo.user.username %>
     <%= image_tag photo.image %>
     <%= photo.caption %>
   </div>

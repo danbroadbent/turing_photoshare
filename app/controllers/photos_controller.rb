@@ -13,12 +13,12 @@ class PhotosController < ApplicationController
 
     @photo = Photo.new
     @photo.album_id = params[:photo][:album_id]
-    # @photo.user_id = User.find(session[:id]).id
     @photo.caption = params[:photo][:caption]
     @photo.image = params[:photo][:image]
-    # @photo.user_id = current_user.id
+# change this after authorization
+    @photo.user_id = current_user ? current_user.id : User.last.id
     @photo.save!
-      redirect_to album_path(@photo.album)
+    redirect_to album_path(@photo.album)
     # else
     #   redirect_to root
     # end
