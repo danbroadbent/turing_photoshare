@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
     @photo.caption = params[:photo][:caption]
     @photo.image = params[:photo][:image]
 # change this after authorization
-    @photo.user_id = current_user ? current_user.id : User.last.id
+    @photo.user_id = current_user.id #? current_user.id : User.last.id
     @photo.save!
     redirect_to album_path(@photo.album)
     # else
