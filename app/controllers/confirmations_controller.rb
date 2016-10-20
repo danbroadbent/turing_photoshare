@@ -4,14 +4,14 @@ class ConfirmationsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
 
     if @user.verification_code == params[:verification_code]
-      @user.confirm!
+      # @user.confirm!
       session[:authenticated] = true
 
-      flash[:notice] = "Welcome #{@user.first_name}. I hope you like pictures!!!"
-      redirect_to secrets_path
+      flash[:notice] = "You are logged in as #{@user.username}. I hope you like pictures!!!"
+      redirect_to user_path(@user)
     else
       flash.now[:error] = "Verification code is incorrect. Chase Said so!"
       render :new
