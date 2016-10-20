@@ -13,6 +13,10 @@ gem 'faker'
 gem 'rails_12factor', group: :production
 gem 'faraday'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'google-cloud'
+gem 'carrierwave'
+gem 'fog'
+# gem 'googleauth'
 
 group :development, :test do
   gem 'byebug', platform: :mri
