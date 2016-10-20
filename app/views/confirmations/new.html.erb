@@ -1,0 +1,13 @@
+<div class="col-md-6 col-md-offset-3 text-center">
+  <h1>Enter 6-digit Code</h1>
+  <%= form_tag confirmations_path, method: "post" do %>
+    <div class="form-group text-left">
+      <%= label_tag :verification_code %>
+      <%= text_field_tag :verification_code, :class => "form-control" %>
+    </div>
+
+    <div class=btn-group>
+      <%= submit_tag "Submit", :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
