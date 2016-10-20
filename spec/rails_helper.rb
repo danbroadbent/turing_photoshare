@@ -15,6 +15,15 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+def stub_login_user(user)
+  visit login_path
+  fill_in "Username", with: user.username
+  fill_in "Password", with: user.password
+  click_link "Login"
+  fill_in "verification_code", with: user.verfication_code
+  click_button "Submit"
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
