@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'home#index'
+
+  resources :users, only: [:new, :create, :show]
+  resources :confirmations, only: [:new, :create]
   resources :albums, only: [:index, :show, :new, :create]
+  resources :photos, only: [:show, :new, :create]
 end
