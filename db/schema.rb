@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 20161019204706) do
 
   create_table "users", force: :cascade do |t|
     t.integer  "role"
-    t.citext   "username"
     t.string   "password_digest"
     t.boolean  "active"
     t.string   "verification_code"
