@@ -10,7 +10,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'faker'
-gem 'rails_12factor', group: :productio
+gem 'rails_12factor', group: :production
 gem 'faraday'
 gem 'bootstrap-sass', '~> 3.3.6'
 
