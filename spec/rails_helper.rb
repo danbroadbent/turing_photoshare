@@ -8,6 +8,7 @@ require 'capybara/rails'
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.hook_into :webmock
+  config.allow_http_connections_when_no_cassette = true
 end
 
 Shoulda::Matchers.configure do |config|
@@ -21,8 +22,9 @@ def stub_login_user(user)
   visit login_path
   fill_in "Username", with: user.username
   fill_in "Password", with: user.password
-  click_link "Login"
-  fill_in "verification_code", with: user.verfication_code
+  click_on "Submit"
+  expect(current_path).to eq(new_confirmation_path)
+  fill_in 'verification_code', with: user.verification_code
   click_button "Submit"
 end
 
