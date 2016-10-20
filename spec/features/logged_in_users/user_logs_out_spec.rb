@@ -16,6 +16,9 @@ RSpec.feature "Registered user logs in" do
       expect(current_path).to eq(user_path(user))
       expect(page).to have_content(user.username)
       expect(page).to have_content("Logout")
+      click_on "Logout"
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content("Login")
     end
   end
 end
