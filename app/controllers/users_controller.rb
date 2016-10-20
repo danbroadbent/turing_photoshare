@@ -15,6 +15,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+# fix for security
+    @user = User.find(session[:user_id])
+  end
+
   private
 
   def user_params
@@ -22,6 +27,7 @@ class UsersController < ApplicationController
                                  :username,
                                  :password_digest,
                                  :active,
-                                 :verification_code)
+                                 :verification_code,
+                                 :phone_number)
   end
 end
