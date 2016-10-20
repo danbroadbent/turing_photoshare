@@ -1,6 +1,5 @@
 class PhotosController < ApplicationController
   def new
-    # binding.pry
     @photo = Photo.new
   end
 
@@ -14,7 +13,7 @@ class PhotosController < ApplicationController
 
     @photo = Photo.new
     @photo.album_id = params[:photo][:album_id]
-    @photo.user_id = Fabricate(:user).id
+    # @photo.user_id = User.find(session[:id]).id
     @photo.caption = params[:photo][:caption]
     @photo.image = params[:photo][:image]
     # @photo.user_id = current_user.id
