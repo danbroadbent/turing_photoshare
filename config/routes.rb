@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   resources :confirmations, only: [:new, :create]
   resources :albums, only: [:index, :show, :new, :create]
   resources :photos, only: [:show, :new, :create]
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 end

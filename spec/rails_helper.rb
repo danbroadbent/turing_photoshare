@@ -4,15 +4,28 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-
-
 require 'capybara/rails'
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.allow_http_connections_when_no_cassette = true
+end
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+def stub_login_user(user)
+  visit login_path
+  fill_in "Username", with: user.username
+  fill_in "Password", with: user.password
+  click_on "Submit"
+  expect(current_path).to eq(new_confirmation_path)
+  fill_in 'verification_code', with: user.verification_code
+  click_button "Submit"
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

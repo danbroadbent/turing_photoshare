@@ -18,6 +18,11 @@ gem 'carrierwave'
 gem 'fog'
 # gem 'googleauth'
 
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+end
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
