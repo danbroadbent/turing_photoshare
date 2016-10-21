@@ -1,1 +1,6 @@
+<%= @albums.each do |album| %>
+  <%= link_to album.title, album_path(album) %>
+  <%= render 'shared/photo_tile', photo: album.photos.first %>
+<% end %>
+
 <%= link_to "Create Album", new_album_path %>

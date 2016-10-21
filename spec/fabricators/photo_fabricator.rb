@@ -1,6 +1,4 @@
 Fabricator(:photo) do
-  caption "MyText"
-  album   nil
-  user    nil
-  image   "MyString"
+  caption { Faker::Name.title }
+  image
 end
