@@ -22,12 +22,21 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    @album = Album.find(params[:id])
+    redirect_to login_path if guest_accessing_private_album?
+    @album = current_album
   end
 
   private
 
     def album_params
       params.require(:album).permit(:title, :description, :public)
+    end
+
+    def current_album
+      Album.find(params[:id])
+    end
+
+    def guest_accessing_private_album?
+      guest_user? && current_album.private?
     end
 end
