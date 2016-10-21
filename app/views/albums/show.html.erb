@@ -2,15 +2,7 @@
 <p><%= @album.description %></p>
 <%= link_to "Add Photo", new_photo_path(album_id: @album.id) %>
 <% @album.photos.each do |photo| %>
-  <div class="container col-md-3">
-    <div class="photo_tile well">
-      <p class="small"><%= photo.user.username %></p>
-      <div class="thumbnail">
-        <%= image_tag photo.image %>
-      </div>
-      <%= photo.caption %>
-    </div>
-  </div>
+  <%= render 'shared/photo_tile', photo: photo %>
 <% end %>
 <h2>Album Comments</h2>
 <% @album.comments.each do |comment| %>

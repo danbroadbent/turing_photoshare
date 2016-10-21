@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "user creates private album" do
   scenario "from album new page" do
     user = Fabricate(:user)
+    stub_login_user(user)
     visit albums_path
     click_link "Create Album"
     fill_in "Title", with: "My Album Title"

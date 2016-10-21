@@ -1,5 +1,10 @@
 class AlbumsController < ApplicationController
   def index
+    if current_user
+      @albums = current_user.albums
+    else
+      @albums = Album.where(public: true)
+    end
   end
 
   def new
@@ -8,6 +13,7 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
+    @album.user_id = current_user.id
     if @album.save
       redirect_to album_path(@album)
     else
