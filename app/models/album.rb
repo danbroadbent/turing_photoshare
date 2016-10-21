@@ -6,4 +6,8 @@ class Album < ApplicationRecord
   def private?
     !self.public
   end
+
+  def self.find_all_public
+    where(public: true)
+  end
 end

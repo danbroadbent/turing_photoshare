@@ -3,7 +3,7 @@ class AlbumsController < ApplicationController
     if current_user
       @albums = current_user.albums
     else
-      @albums = Album.where(public: true)
+      @albums = Album.find_all_public
     end
   end
 
