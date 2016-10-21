@@ -4,3 +4,24 @@
 <% @album.photos.each do |photo| %>
   <%= render 'shared/photo_tile', photo: photo %>
 <% end %>
+<h2>Album Comments</h2>
+<% @album.comments.each do |comment| %>
+  <p>
+    <b>Author:</b>
+    <%= User.find(comment.user_id).username %>
+  </p>
+
+  <p>
+    <b>Comment:</b>
+    <%= comment.body %>
+  </p>
+  <p>
+    <b>Created At:</b>
+    <%= comment.created_at %>
+  </p>
+<% end %>
+<%= form_for ([@album, @album.comments.build]) do |f| %>
+<%= f.label :body, 'Comment' %>
+<%= f.text_field :body %>
+<%= f.submit "Add Comment" %>
+<% end %>

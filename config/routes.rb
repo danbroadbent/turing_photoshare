@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
   resources :confirmations, only: [:new, :create]
-  resources :albums, only: [:index, :show, :new, :create]
+  resources :albums, only: [:index, :show, :new, :create] do
+    resources :comments, only: [:create]
+  end
   resources :photos, only: [:show, :new, :create]
 
   get '/login', to: 'sessions#new'
