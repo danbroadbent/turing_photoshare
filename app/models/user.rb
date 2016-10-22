@@ -9,4 +9,8 @@ class User < ApplicationRecord
   extend Forwardable
 
   def_delegators :user_profile, :username
+
+  def self.find_by_username(username)
+    find(UserProfile.find_by(username: username).user_id)
+  end
 end

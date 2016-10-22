@@ -3,4 +3,5 @@ Fabricator(:user) do
   password 'password'
   active true
   verification_code '123456'
+  
 end

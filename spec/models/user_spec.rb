@@ -11,4 +11,14 @@ RSpec.describe User, type: :model do
 
     expect(user.username).to eq(user.user_profile.username)
   end
+
+  it "can be found by username" do
+    user_new = Fabricate(:user)
+    another_user = Fabricate(:user)
+    user_profile = Fabricate(:user_profile, user: user_new)
+    
+    user = User.find_by_username(user_new.username)
+    expect(user).to eq(user_new)
+    expect(user).to_not eq(another_user)
+  end
 end
