@@ -1,5 +1,5 @@
 Fabricator(:album) do
-  title { Faker::Name.title }
+  title       { Faker::Name.title }
   description { Faker::Lorem.sentence }
-  public false
+  public      false
 end
