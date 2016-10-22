@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def authorize!
     unless current_permission.authorized?
-      redirect_to root_url, danger: "The page you requested is not available or does not exist."
+      redirect_to albums_path, danger: "The page you requested is not available or does not exist."
     end
   end
 end

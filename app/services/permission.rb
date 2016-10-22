@@ -6,15 +6,17 @@ class Permission
   end
 
   def authorized?
-    require "pry"; binding.pry
     if user.admin?
       return true if controller == "home" && action.in?(%w(index))
+      return true if controller == "albums" && action.in?(%w(index))
       false
     elsif user.registered?
       return true if controller == "home" && action.in?(%w(index))
+      return true if controller == "albums" && action.in?(%w(index))
       false
     else
       return true if controller == "home" && action.in?(%w(index))
+      return true if controller == "albums" && action.in?(%w(index))
       false
     end
   end
