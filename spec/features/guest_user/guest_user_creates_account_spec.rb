@@ -41,4 +41,20 @@ RSpec.feature "Guest user creates account" do
       end
     end
   end
+
+  context "they submit without username" do
+    it "they are taken back to retry" do
+      visit '/'
+      click_on "Create Account"
+      fill_in 'Phone number', with: ENV['MY_PHONE_NUMBER']
+      fill_in 'Password', with: 'alpha'
+      fill_in 'Password confirmation', with: 'beta'
+      click_on 'Create New Account'
+
+      expect(current_path).not_to eq(new_confirmation_path)
+      within "h1" do
+        expect(page).to have_content('Create Account')
+      end
+    end
+  end
 end

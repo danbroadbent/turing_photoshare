@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'albums#index'
 
   resources :users, only: [:new, :create, :show]
   resources :confirmations, only: [:new, :create]
