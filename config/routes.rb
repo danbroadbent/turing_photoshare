@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
+  get '/profile', to: 'users#show', as: 'user'
 
-  resources :users, only: [:new, :create, :show]
+  resources :users, only: [:new, :create]
   resources :confirmations, only: [:new, :create]
   resources :albums, only: [:index, :show, :new, :create] do
     resources :comments, only: [:create]

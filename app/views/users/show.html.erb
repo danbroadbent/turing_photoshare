@@ -1,2 +1,19 @@
-<%= @user.username %>
-<%= @user.phone_number %>
+<div class="container profile">
+  <h3><%= @user.username %></h3>
+  <h5>Profile info:</h5>
+
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+        <%= render 'shared/user_profile_row', key: "Email", value: @user.user_profile.email %>
+        <%= render 'shared/user_profile_row', key: "Phone", value: @user.phone_number %>
+        <%= render 'shared/user_profile_row', key: "Bio", value: @user.user_profile.bio %>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= link_to "Edit Profile", "google.com", class: "btn btn-primary" %>
+  </div>
+
+</div>
