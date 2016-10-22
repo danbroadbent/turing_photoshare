@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    @user_profile = UserProfile.new(user: @user)
     if @user.save
       session[:user_id] = @user.id
       ConfirmationSender.send_confirmation_to(@user)
