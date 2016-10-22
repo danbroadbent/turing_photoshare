@@ -6,6 +6,7 @@ class Permission
   end
 
   def authorized?
+    require "pry"; binding.pry
     if user.admin?
       return true if controller == "home" && action.in?(%w(index))
       false
