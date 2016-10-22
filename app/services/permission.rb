@@ -11,17 +11,19 @@ puts "#{controller} - #{action}"
 
     if user.admin?
       return true if controller == "home" && action.in?(%w(index))
-      return true if controller == "albums" && action.in?(%w(index show))
+      return true if controller == "albums" && action.in?(%w(index show new create))
       return true if controller == "users" && action.in?(%w(show))
       return true if controller == "confirmations" && action.in?(%w(new create))
       return true if controller == "comments" && action.in?(%w(create))
+      return true if controller == "photos" && action.in?(%w(new create))
       false
     elsif user.registered?
       return true if controller == "home" && action.in?(%w(index))
-      return true if controller == "albums" && action.in?(%w(index show))
+      return true if controller == "albums" && action.in?(%w(index show new create))
       return true if controller == "users" && action.in?(%w(show))
       return true if controller == "confirmations" && action.in?(%w(new create))
       return true if controller == "comments" && action.in?(%w(create))
+      return true if controller == "photos" && action.in?(%w(new create))
       false
     else
       return true if controller == "home" && action.in?(%w(index))
