@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   def authorize!
     unless current_permission.authorized?
 # For debugging only. Remove before going to production.
+puts current_user.role if current_user
 puts "#{params[:controller]} - #{params[:action]}"
 
       redirect_to albums_path, danger: "The page you requested is not available or does not exist."
