@@ -3,15 +3,19 @@ class ApplicationController < ActionController::Base
 
   before_action :authorize!
 
-  helper_method :current_user
+  helper_method :current_user, :guest_user?
 
   def current_user
     @user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  # def guest_user?
-  #   session[:user_id].nil?
-  # end
+  def guest_user?
+    session[:user_id].nil?
+  end
+
+  def admin_user?
+    current_user.admin?
+  end
 
   def current_permission
     Permission.new(user: current_user,
