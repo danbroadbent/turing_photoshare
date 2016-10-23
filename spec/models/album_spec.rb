@@ -7,18 +7,16 @@ RSpec.describe Album, type: :model do
   it { should have_many(:album_users) }
 
   it "returns true if it is private" do
-    user = Fabricate(:user)
-    private_album = Fabricate(:album, user_id: user.id)
-    public_album = Fabricate(:album, public: true, user_id: user.id)
+    private_album = Fabricate(:album)
+    public_album = Fabricate(:album, public: true)
 
     expect(public_album.private?).to eq(false)
     expect(private_album.private?).to eq(true)
   end
 
   it "can find all public albums" do
-    user = Fabricate(:user)
-    private_album = Fabricate(:album, user_id: user.id)
-    public_album = Fabricate(:album, public: true, user_id: user.id)
+    private_album = Fabricate(:album)
+    public_album = Fabricate(:album, public: true)
 
     expect(Album.find_all_public.count).to eq(1)
     expect(Album.find_all_public.first).to eq(public_album)

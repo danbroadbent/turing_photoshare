@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "User can delete own comments"  do
   scenario "User creates comment, and deletes it" do
     user = Fabricate(:user)
-    album = Fabricate(:album, user_id: user.id)
+    album = Fabricate(:album)
     stub_login_user(user)
 
     visit "/albums/#{album.id}"
@@ -23,7 +23,7 @@ RSpec.feature "User can delete own comments"  do
 
   scenario "User edits comment" do
     user = Fabricate(:user)
-    album = Fabricate(:album, user_id: user.id)
+    album = Fabricate(:album)
     stub_login_user(user)
 
     visit "/albums/#{album.id}"

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "user uploads photo" do
   scenario "from album page" do
       user = Fabricate(:user)
-      album = Fabricate(:album, user_id: user.id)
+      album = Fabricate(:album)
       stub_login_user(user)
       visit album_path(album)
       click_link "Add Photo"

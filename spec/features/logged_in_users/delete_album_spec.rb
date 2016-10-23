@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "user deletes an album they own" do
   scenario "and the album is no longer on their my albums page" do
       user = Fabricate(:user)
-      album = Fabricate(:album, user_id: user.id)
+      album = Fabricate(:album)
       # album_title = album.title
       stub_login_user(user)
       visit album_path(album)

@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.feature "Logged in visits my albums path" do
   scenario "they see all albums they've uploaded" do
     user = Fabricate(:user)
-    albums = Fabricate.times(2, :album, user_id: user.id)
+    albums = Fabricate.times(2, :album)
+    Fabricate(:album_user, user: user, album: albums.first)
+    Fabricate(:album_user, user: user, album: albums.last)
     stub_login_user(user)
 
     visit my_albums_path
