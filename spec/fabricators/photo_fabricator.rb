@@ -1,4 +1,4 @@
 Fabricator(:photo) do
   caption { Faker::Name.title }
-  image
+  image {Faker::Avatar.image}
 end

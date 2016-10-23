@@ -9,7 +9,7 @@ RSpec.feature "User adds comment to album" do
     visit "/albums/#{album.id}"
     fill_in 'Comment', with: 'hello world'
     click_on 'Add Comment'
-    
+
     expect(current_path).to eq("/albums/#{album.id}")
     expect(page).to have_content('hello world')
     expect(page).to have_content(user.username)
