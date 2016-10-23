@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Guest user creates account" do
   context "user submits the correct 6 digit code" do
     it "shows them their user page" do
-      # VCR.use_cassette("create account") do
+      VCR.use_cassette("create account") do
         visit '/'
         click_on "Create Account"
         fill_in 'Username', with: 'calaway'
@@ -22,7 +22,7 @@ RSpec.feature "Guest user creates account" do
         expect(page).to have_content(User.last.username)
         expect(page).to have_content(ENV['MY_PHONE_NUMBER'])
       end
-    # end
+    end
   end
 
   context "user submits an incorrect 6 digit code" do
