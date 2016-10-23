@@ -15,7 +15,6 @@ RSpec.feature "Guest user visits home page" do
     expect(page).to have_link(public_album.title)
 
     within ".photo_tile" do
-      expect(page).to have_content(public_album.user.username)
       expect(page).to have_css("img")
       expect(page).to have_content(public_album.photos.first.caption)
     end

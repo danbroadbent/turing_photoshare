@@ -16,7 +16,6 @@ RSpec.feature "user uploads photo" do
       expect(current_path).to eq(album_path(album))
       within ".photo_tile" do
         expect(page).to have_content("My photo caption.")
-        expect(page).to have_content(user.username)
         expect(page).to have_css("img")
     end
   end

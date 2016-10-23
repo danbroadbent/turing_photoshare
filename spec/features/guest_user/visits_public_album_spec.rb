@@ -14,7 +14,6 @@ RSpec.feature "Guest user visits a public album page" do
     visit album_path(public_album)
 
     within ".photo_tile" do
-      expect(page).to have_content(public_album.user.username)
       expect(page).to have_css("img")
       expect(page).to have_content(public_album.photos.first.caption)
     end
