@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "Guest user visits a public album page" do
   it "and sees all of the album's contents" do
     user = Fabricate(:user)
+    Fabricate(:user_profile, user: user)
     public_album = Fabricate(:album, public: true, user_id: user.id)
     Fabricate( :photo,
                album_id: public_album.id,

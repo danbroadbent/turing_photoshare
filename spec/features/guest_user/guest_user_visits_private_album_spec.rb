@@ -12,7 +12,7 @@ RSpec.feature "Guest user visits a private album page" do
 
     visit album_path(private_album)
 
-    expect(current_path).to eq(login_path)
+    expect(current_path).to eq(albums_path)
 
   end
 end

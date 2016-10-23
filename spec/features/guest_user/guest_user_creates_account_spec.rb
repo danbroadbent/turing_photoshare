@@ -20,6 +20,7 @@ RSpec.feature "Guest user creates account" do
 
         expect(current_path).to eq(user_path(User.last))
         expect(page).to have_content(User.last.username)
+        expect(page).to have_content(ENV['MY_PHONE_NUMBER'])
       end
     end
   end

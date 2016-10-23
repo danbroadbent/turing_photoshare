@@ -4,6 +4,7 @@ RSpec.feature "Registered user logs in" do
   context "Registered user logs in" do
     it "shows them their user page" do
       user = Fabricate(:user)
+      Fabricate(:user_profile, user: user)
       visit '/'
       click_on "Login"
       fill_in "Username", with: user.username

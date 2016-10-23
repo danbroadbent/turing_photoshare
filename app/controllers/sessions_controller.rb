@@ -3,8 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-
-    user = User.find_by(username: params[:username])
+    user = User.find_by_username(params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to new_confirmation_path
@@ -15,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
-    redirect_to root_path
+    session.clear
+    redirect_to albums_path
   end
 end
