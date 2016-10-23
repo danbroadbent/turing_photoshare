@@ -1,9 +1,16 @@
-<p><%= @album.title %></p>
-<p><%= @album.description %></p>
-<%= link_to "Add Photo", new_photo_path(album_id: @album.id) %>
-<% @album.photos.each do |photo| %>
-  <%= render 'shared/photo_tile', photo: photo %>
-<% end %>
+<div class="container">
+  <h3><%= @album.title %></h3>
+  <p><%= @album.description %></p>
+  <% @album.photos.each do |photo| %>
+    <%= render 'shared/photo_tile', photo: photo %>
+  <% end %>
+  <div class="album-button-bar btn-group">
+    <%= link_to "Add Photo", new_photo_path(album_id: @album.id), class: "btn btn-primary btn-sm" %>
+    <%= render 'shared/album_delete' %>
+  </div>
+</div>
+
+
 <h2>Album Comments</h2>
 <% @album.comments.each do |comment| %>
 <div class="comment_tile">

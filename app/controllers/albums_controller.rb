@@ -26,6 +26,14 @@ class AlbumsController < ApplicationController
     @album = current_album
   end
 
+  def destroy
+    album_title = current_album.title
+    delete_photos
+    current_album.delete
+    flash[:success] = "Album '#{album_title}' has been deleted."
+    redirect_to my_albums_path
+  end
+
   private
 
     def album_params
@@ -34,6 +42,10 @@ class AlbumsController < ApplicationController
 
     def current_album
       Album.find(params[:id])
+    end
+
+    def delete_photos
+      current_album.photos.each { |photo| photo.delete }
     end
 
     # def guest_accessing_private_album?
