@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
 
   it "has a username" do
     user = Fabricate(:user)
+    
     user_profile = Fabricate(:user_profile, user: user)
 
     expect(user.username).to eq(user.user_profile.username)

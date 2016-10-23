@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'albums#index'
   get '/profile', to: 'users#show', as: 'user'
 
   resources :users, only: [:new, :create]

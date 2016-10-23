@@ -1,10 +1,12 @@
 class User < ApplicationRecord
-
   has_secure_password
 
   has_many :albums
   has_many :photos
   has_one :user_profile
+
+  enum role: %w(registered admin)
+  before_validation :set_role
 
   extend Forwardable
 
@@ -12,5 +14,17 @@ class User < ApplicationRecord
 
   def self.find_by_username(username)
     find(UserProfile.find_by(username: username).user_id)
+  end
+
+  def set_role
+    self.role ||= 0
+  end
+
+  def admin?
+    self.role == "admin"
+  end
+
+  def registered?
+    self.role == "registered"
   end
 end
