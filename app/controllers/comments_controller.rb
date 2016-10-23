@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     @album = Album.find(params[:album_id])
     @comment = @album.comments.create(comment_params)
     @comment.user_id = current_user.id
-    
+
 
       @comment.save
       redirect_to album_path(@album)
@@ -12,9 +12,18 @@ class CommentsController < ApplicationController
     # end
   end
 
+  def destroy
+    # binding.pry
+    @album = Album.find(params[:album_id])
+
+    @album.comments.delete(params[:id])
+
+    redirect_to album_path(@album)
+  end
+
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :user_id)
+    params.require(:comment).permit(:body, :user_id, :album_id)
   end
 end

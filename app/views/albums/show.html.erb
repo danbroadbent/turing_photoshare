@@ -6,6 +6,7 @@
 <% end %>
 <h2>Album Comments</h2>
 <% @album.comments.each do |comment| %>
+<div class="comment_tile">
   <p>
     <b>Author:</b>
     <%= User.find(comment.user_id).username %>
@@ -19,6 +20,8 @@
     <b>Created At:</b>
     <%= comment.created_at %>
   </p>
+  <%= link_to "Delete Comment", album_comment_path(@album, comment), method: :delete %>
+</div>
 <% end %>
 <%= form_for ([@album, @album.comments.build]) do |f| %>
 <%= f.label :body, 'Comment' %>
