@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container album">
   <h3><%= @album.title %></h3>
   <p><%= @album.description %></p>
   <% @album.photos.each do |photo| %>
@@ -6,6 +6,7 @@
   <% end %>
   <div class="album-button-bar btn-group">
     <%= link_to "Add Photo", new_photo_path(album_id: @album.id), class: "btn btn-primary btn-sm" %>
+    <%= link_to "Share Album", new_album_user_path(album_id: @album.id), class: "btn btn-default" %>
     <%= render 'shared/album_delete' %>
   </div>
 </div>
