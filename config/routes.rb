@@ -7,6 +7,14 @@ Rails.application.routes.draw do
   delete 'logout',      to: 'sessions#destroy'
   get 'my_albums',      to: 'my_albums#index'
 
+  namespace :api do
+    namespace :v1 do
+      resources :albums, only: [:show] do
+        resources :comments, only: [:create, :destroy, :edit, :update, :index]
+      end
+    end
+  end
+
   resources :users, only: [:new, :create]
   resources :user_profiles, only: [:edit, :update]
   resources :confirmations, only: [:new, :create]
