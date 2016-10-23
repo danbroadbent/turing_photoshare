@@ -3,5 +3,6 @@ Fabricator(:user) do
   password 'password'
   active true
   verification_code '123456'
-  
+  api_token '987654'
+
 end

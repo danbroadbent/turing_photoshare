@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:role,
                                  :password,
                                  :active,
-                                 :verification_code)
+                                 :verification_code,
+                                 :api_token)
   end
 end
