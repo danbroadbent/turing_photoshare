@@ -1,13 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature "When a logged in user clicks logout" do
-  scenario "they are logged out" do
-    stub_login_user Fabricate(:user)
-
-    click_link "Logout"
-
-    expect(current_path).to eq(albums_path)
-
+RSpec.feature "Guest user visits home page" do
+  scenario "and sees guest user navigation bar" do
+    visit root_path
     within ".nav" do
       expect(page).to have_link("Login")
       expect(page).to have_link("Create Account")
