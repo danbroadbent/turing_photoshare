@@ -1,0 +1,5 @@
+<%= form_for ([@album, @comment]) do |f| %>
+<%= f.label :body, 'Comment' %>
+<%= f.text_field :body %>
+<%= f.submit "Update Comment" %>
+<% end %>
