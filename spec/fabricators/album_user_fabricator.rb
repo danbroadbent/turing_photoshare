@@ -1,5 +1,5 @@
 Fabricator(:album_user) do
-  user  nil
-  album nil
+  user
+  album
   owner false
 end

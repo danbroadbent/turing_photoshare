@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.feature "Guest user visits home page" do
   it "and sees guest user content" do
     user = Fabricate(:user)
-    Fabricate(:user_profile, user: user)
-    public_album = Fabricate(:album, public: true, user_id: user.id)
+    public_album = Fabricate(:album, public: true)
     Fabricate( :photo,
                album_id: public_album.id,
                user_id: user.id,
                image: File.open(File.join(Rails.root, "spec/fixtures/dummy.png"))
              )
+
     visit root_path
     expect(current_path).to eq(root_path)
     expect(page).to have_link(public_album.title)
@@ -22,7 +22,7 @@ RSpec.feature "Guest user visits home page" do
 
   it "and does not see private content" do
     user = Fabricate(:user)
-    public_album = Fabricate(:album, user_id: user.id)
+    public_album = Fabricate(:album)
     Fabricate( :photo,
                album_id: public_album.id,
                user_id: user.id,
