@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authorize!
 
-  helper_method :current_user, :guest_user?
+  helper_method :current_user, :guest_user?, :admin_user?
 
   def current_user
     @user ||= User.find(session[:user_id]) if session[:user_id]

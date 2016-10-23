@@ -1,11 +1,12 @@
 <div class="nabbar-default">
   <ul class="nav nav-tabs">
+    <li role="presentation"><%= link_to "Turing Photoshare", root_path, class: "navbar-nav-item nav-link" %></li>
     <% if guest_user? %>
       <%= render 'shared/navigation_guest' %>
     <% elsif admin_user? %>
-
+      <%= render 'shared/navigation_admin' %>
     <% elsif current_user %>
-
+      <%= render 'shared/navigation_logged_in' %>
     <% end %>
   </ul>
 </div>
