@@ -21,6 +21,7 @@
     <%= comment.created_at %>
   </p>
   <%= link_to "Delete Comment", album_comment_path(@album, comment), method: :delete %>
+  <%= link_to "Edit Comment", edit_album_comment_path(@album, comment) %>
 </div>
 <% end %>
 <%= form_for ([@album, @album.comments.build]) do |f| %>
