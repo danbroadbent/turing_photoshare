@@ -19,6 +19,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 def stub_login_user(user)
+  user_profile = Fabricate(:user_profile, user: user)
   visit login_path
   fill_in "Username", with: user.username
   fill_in "Password", with: user.password
