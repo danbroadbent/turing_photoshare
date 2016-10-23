@@ -13,7 +13,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    # binding.pry
     @album = Album.find(params[:album_id])
 
     @album.comments.delete(params[:id])
