@@ -1,6 +1,7 @@
 <div class="container album">
   <h3><%= @album.title %></h3>
   <p><%= @album.description %></p>
+  <p class="small"><%= @album.display_users.join %></p>
   <% @album.photos.each do |photo| %>
     <%= render 'shared/photo_tile', photo: photo %>
   <% end %>
