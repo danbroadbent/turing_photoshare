@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   resources :user_profiles, only: [:edit, :update]
   resources :confirmations, only: [:new, :create]
-  resources :albums, only: [:index, :show, :new, :create] do
+  resources :albums, only: [:index, :show, :new, :create, :destroy] do
     resources :comments, only: [:create]
   end
   resources :photos, only: [:show, :new, :create]

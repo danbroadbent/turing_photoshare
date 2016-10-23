@@ -1,0 +1,6 @@
+<div class="albums">
+  <% albums.each do |album| %>
+    <%= link_to album.title, album_path(album) %>
+    <%= render 'shared/photo_tile', photo: album.photos.first %>
+  <% end %>
+</div>
