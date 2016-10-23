@@ -19,6 +19,12 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def update
+    @user = current_user
+    TokenSender.send_token_to(@user)
+    redirect_to '/profile'
+  end
+
   private
 
   def user_params

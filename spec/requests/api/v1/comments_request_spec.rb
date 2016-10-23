@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Comments CRUD API" do
   it "returns a list of comments to authnticated user" do
-    user = Fabricate(:user)
+    user = Fabricate(:user, api_token: '12345')
     album = Fabricate(:album, user_id: user.id)
     comment_1 = Fabricate(:comment, album_id: album.id, user_id: user.id)
     comment_2 = Fabricate(:comment, album_id: album.id, user_id: user.id)
