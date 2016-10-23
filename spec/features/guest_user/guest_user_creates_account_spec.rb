@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Guest user creates account" do
   context "user submits the correct 6 digit code" do
     it "shows them their user page" do
-      VCR.use_cassette("create account") do
+      # VCR.use_cassette("create account") do
         visit '/'
         click_on "Create Account"
         fill_in 'Username', with: 'calaway'
@@ -20,8 +20,9 @@ RSpec.feature "Guest user creates account" do
 
         expect(current_path).to eq(user_path(User.last))
         expect(page).to have_content(User.last.username)
+        expect(page).to have_content(ENV['MY_PHONE_NUMBER'])
       end
-    end
+    # end
   end
 
   context "user submits an incorrect 6 digit code" do
@@ -38,6 +39,22 @@ RSpec.feature "Guest user creates account" do
         click_on 'Submit'
 
         expect(page).to have_content('Enter 6-digit Code')
+      end
+    end
+  end
+
+  context "they submit without username" do
+    it "they are taken back to retry" do
+      visit '/'
+      click_on "Create Account"
+      fill_in 'Phone number', with: ENV['MY_PHONE_NUMBER']
+      fill_in 'Password', with: 'alpha'
+      fill_in 'Password confirmation', with: 'beta'
+      click_on 'Create New Account'
+
+      expect(current_path).not_to eq(new_confirmation_path)
+      within "h1" do
+        expect(page).to have_content('Create Account')
       end
     end
   end

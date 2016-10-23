@@ -22,7 +22,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    redirect_to login_path if guest_accessing_private_album?
+    # redirect_to login_path if guest_accessing_private_album?
     @album = current_album
   end
 
@@ -36,7 +36,7 @@ class AlbumsController < ApplicationController
       Album.find(params[:id])
     end
 
-    def guest_accessing_private_album?
-      guest_user? && current_album.private?
-    end
+    # def guest_accessing_private_album?
+    #   guest_user? && current_album.private?
+    # end
 end

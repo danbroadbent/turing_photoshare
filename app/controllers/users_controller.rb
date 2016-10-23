@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    if @user.save
+    @user_profile = UserProfile.new(user: @user, username: params[:user][:user_profile][:username], phone_number: params[:user][:user_profile][:phone_number])
+    if @user.save && @user_profile.save
       session[:user_id] = @user.id
       ConfirmationSender.send_confirmation_to(@user)
       redirect_to new_confirmation_path
@@ -23,10 +23,8 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:role,
-                                 :username,
                                  :password,
                                  :active,
-                                 :verification_code,
-                                 :phone_number)
+                                 :verification_code)
   end
 end
