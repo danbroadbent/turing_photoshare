@@ -10,7 +10,7 @@ RSpec.feature "Logged in user visits user profile page" do
     visit user_path
 
     expect(page).to have_link("My Albums")
-    expect(page).to have_link("Edit Profile")
+    expect(page).to have_link("Edit profile")
 
     within ".profile" do
       expect(page).to have_content(user.username)

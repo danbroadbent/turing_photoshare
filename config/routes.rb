@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'my_albums',      to: 'my_albums#index'
 
   resources :users, only: [:new, :create]
+  resources :user_profiles, only: [:edit, :update]
   resources :confirmations, only: [:new, :create]
   resources :albums, only: [:index, :show, :new, :create] do
     resources :comments, only: [:create]
