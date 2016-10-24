@@ -15,6 +15,16 @@ class Api::V1::CommentsController < ApplicationController
     end
   end
 
+  def create
+    if api_user && api_album.permitted?(api_user)
+      comment = Comment.create(body: params[:body], album_id: params[:album_id], user_id: api_user.id)
+      # api_album << comment
+      render :json => comment.to_json, :status => 201
+    else
+      render :json => {:error => 'forbidden'}.to_json, :status => 403
+    end
+  end
+
   private
   def api_user
     User.find_by(api_token: params[:api_token])

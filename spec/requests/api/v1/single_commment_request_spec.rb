@@ -30,17 +30,15 @@ RSpec.describe "Comments CRUD API" do
     expect(response).to have_http_status(:forbidden)
   end
 
-#   it "fails to return list if Unauthorized" do
-#     user = Fabricate(:user, api_token: "435342")
-#     album = Fabricate(:album)
-#     Fabricate(:album_user, user: user, album: album)
-#     comment_1 = Fabricate(:comment, album_id: album.id, user: user)
-#     comment_2 = Fabricate(:comment, album_id: album.id, user: user)
-#
-#     get "/api/v1/albums/#{album.id}/comments.json?api_token=93h4573"
-#
-#     parsed_comments = JSON.parse(response.body)
-#
-#     expect(response.status).to be(404)
-#   end
+  it "returns 403 if user doesn't have authoized token" do
+    user = Fabricate(:user, api_token: '12345')
+    album = Fabricate(:album)
+    comment_1 = Fabricate(:comment, album: album)
+
+    get "/api/v1/albums/#{album.id}/comments/#{comment_1.id}.json?api_token=777777"
+
+    parsed_comment = JSON.parse(response.body)
+
+    expect(response).to have_http_status(:forbidden)
+  end
 end
