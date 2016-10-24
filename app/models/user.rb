@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :albums
+  has_many :album_users
+  has_many :albums, through: :album_users
   has_many :photos
   has_one :user_profile
 
