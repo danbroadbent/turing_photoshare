@@ -4,7 +4,10 @@ RSpec.feature "Logged in user visits user profile page" do
   it "and sees user profile information" do
     user = Fabricate(:user)
     user_2 = Fabricate(:user)
-    user_profile_2 = Fabricate(:user_profile, user: user_2)
+    user_profile_2 = Fabricate(:user_profile,
+                                user: user_2,
+                                email: 'email@turing.io',
+                                bio: 'my life story!')
 
     stub_login_user(user)
     visit user_path
