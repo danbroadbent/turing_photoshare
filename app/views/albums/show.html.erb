@@ -1,42 +1,49 @@
 <div class="container album">
-  <h3><%= @album.title %></h3>
-  <p><%= @album.description %></p>
-  <p class="small"><%= @album.display_users.join %></p>
-  <% @album.photos.each do |photo| %>
-    <%= render 'shared/photo_tile', photo: photo %>
-  <% end %>
-  <div class="album-button-bar btn-group">
-    <% if @album.permitted?(current_user) %>
-      <%= link_to "Add Photo", new_photo_path(album_id: @album.id), class: "btn btn-primary btn-sm" %>
+  <div class="col-md-12">
+    <h3><%= @album.title %></h3>
+    <p><%= @album.description %></p>
+    <p class="small"><%= @album.display_users.join %></p>
+    <% @album.photos.each do |photo| %>
+      <%= render 'shared/photo_tile', photo: photo %>
     <% end %>
-    <%= link_to "Share Album", new_album_user_path(album_id: @album.id), class: "btn btn-default" %>
-    <%= render 'shared/album_delete' %>
+  </div>
+
+  <div class="container row">
+    <div class="col-md-12">
+      <div class="album-button-bar btn-group">
+        <% if @album.permitted?(current_user) %>
+        <%= link_to "Add Photo", new_photo_path(album_id: @album.id), class: "btn btn-primary btn-sm" %>
+        <% end %>
+        <%= link_to "Share Album", new_album_user_path(album_id: @album.id), class: "btn btn-default btn-sm" %>
+        <%= render 'shared/album_delete' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <h4>Album Comments</h4>
+    <div class="container panel-group">
+      <% @album.comments.each do |comment| %>
+        <div class="panel panel-primary comment_tile">
+          <div class="panel-body small">
+            <div class="btn-group pull-right">
+              <a href="/albums/<%= @album.id %>/comments/<%= comment.id %>/edit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+              <a href="/album/comments/delete?album_id=<%= @album.id %>&comment_id=<%= comment.id %>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+            </div>
+            <div class="pull-left">
+              <h6>Author: <%= User.find(comment.user_id).username %></h6>
+              <p><%= comment.body %></p>
+              <p class="small">Created: <%= distance_of_time_in_words_to_now(comment.created_at) %> ago</p>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+      <%= form_for ([@album, @album.comments.build]) do |f| %>
+      <%= f.label :body, 'Comment' %>
+      <%= f.text_field :body %>
+      <%= f.submit "Add Comment" %>
+      <% end %>
+    </div>
   </div>
 </div>
-
-
-<h2>Album Comments</h2>
-<% @album.comments.each do |comment| %>
-<div class="comment_tile">
-  <p>
-    <b>Author:</b>
-    <%= User.find(comment.user_id).username %>
-  </p>
-
-  <p>
-    <b>Comment:</b>
-    <%= comment.body %>
-  </p>
-  <p>
-    <b>Created At:</b>
-    <%= comment.created_at %>
-  </p>
-  <%= link_to "Delete Comment", album_comment_path(@album, comment), method: :delete %>
-  <%= link_to "Edit Comment", edit_album_comment_path(@album, comment) %>
-</div>
-<% end %>
-<%= form_for ([@album, @album.comments.build]) do |f| %>
-<%= f.label :body, 'Comment' %>
-<%= f.text_field :body %>
-<%= f.submit "Add Comment" %>
-<% end %>
