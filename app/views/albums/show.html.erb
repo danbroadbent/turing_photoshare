@@ -1,11 +1,23 @@
-<p><%= @album.title %></p>
-<p><%= @album.description %></p>
-<%= link_to "Add Photo", new_photo_path(album_id: @album.id) %>
-<% @album.photos.each do |photo| %>
-  <%= render 'shared/photo_tile', photo: photo %>
-<% end %>
+<div class="container album">
+  <h3><%= @album.title %></h3>
+  <p><%= @album.description %></p>
+  <p class="small"><%= @album.display_users.join %></p>
+  <% @album.photos.each do |photo| %>
+    <%= render 'shared/photo_tile', photo: photo %>
+  <% end %>
+  <div class="album-button-bar btn-group">
+    <% if @album.permitted?(current_user) %>
+      <%= link_to "Add Photo", new_photo_path(album_id: @album.id), class: "btn btn-primary btn-sm" %>
+    <% end %>
+    <%= link_to "Share Album", new_album_user_path(album_id: @album.id), class: "btn btn-default" %>
+    <%= render 'shared/album_delete' %>
+  </div>
+</div>
+
+
 <h2>Album Comments</h2>
 <% @album.comments.each do |comment| %>
+<div class="comment_tile">
   <p>
     <b>Author:</b>
     <%= User.find(comment.user_id).username %>
@@ -19,6 +31,9 @@
     <b>Created At:</b>
     <%= comment.created_at %>
   </p>
+  <%= link_to "Delete Comment", album_comment_path(@album, comment), method: :delete %>
+  <%= link_to "Edit Comment", edit_album_comment_path(@album, comment) %>
+</div>
 <% end %>
 <%= form_for ([@album, @album.comments.build]) do |f| %>
 <%= f.label :body, 'Comment' %>

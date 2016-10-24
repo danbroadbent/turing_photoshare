@@ -1,3 +1,1 @@
-<% @albums.each do |album| %>
-  <%= album.title %>
-<% end %>
+<%= render 'shared/album_tiles', albums: @albums %>

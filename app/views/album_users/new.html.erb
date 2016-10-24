@@ -1,0 +1,16 @@
+<div class="col-md-6 col-md-offset-3 text-center">
+  <h3>Share Album</h3>
+  <%= form_for @album_user do |f| %>
+
+    <%= f.hidden_field :album_id, value: @album_id %>
+
+    <div class="form-group text-left">
+      <%= label_tag :username, "Username" %>
+      <%= text_field_tag :username, placeholder: "Enter Username", :class => "form-control" %>
+    </div>
+
+    <div class=btn-group>
+      <%= f.submit "Share Album", :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

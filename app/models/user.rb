@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :albums
+  has_many :album_users
+  has_many :albums, through: :album_users
   has_many :photos
   has_one :user_profile
 
@@ -10,7 +11,7 @@ class User < ApplicationRecord
 
   extend Forwardable
 
-  def_delegators :user_profile, :username, :phone_number
+  def_delegators :user_profile, :username, :phone_number, :email
 
   def self.find_by_username(username)
     find(UserProfile.find_by(username: username).user_id)

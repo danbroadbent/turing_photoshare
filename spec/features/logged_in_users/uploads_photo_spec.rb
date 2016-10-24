@@ -3,9 +3,14 @@ require 'rails_helper'
 RSpec.feature "user uploads photo" do
   scenario "from album page" do
       user = Fabricate(:user)
-      album = Fabricate(:album, user_id: user.id)
+      album = Fabricate(:album)
+      Fabricate(:album_user, user: user, album: album)
       stub_login_user(user)
+
       visit album_path(album)
+
+      expect(current_path).to eq(album_path(album))
+
       click_link "Add Photo"
       expect(current_path).to eq(new_photo_path)
 
@@ -16,7 +21,6 @@ RSpec.feature "user uploads photo" do
       expect(current_path).to eq(album_path(album))
       within ".photo_tile" do
         expect(page).to have_content("My photo caption.")
-        expect(page).to have_content(user.username)
         expect(page).to have_css("img")
     end
   end

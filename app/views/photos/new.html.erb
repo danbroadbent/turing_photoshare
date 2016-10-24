@@ -1,21 +1,23 @@
-<div class="col-md-6 col-md-offset-3 text-center">
-  <h1>Upload Photo</h1>
-  <%= form_for @photo do |f| %>
+<div class="container">
+  <div class="col-md-6 col-md-offset-3 text-center">
+  <h3>Upload Photo</h3>
+    <%= form_for @photo do |f| %>
 
-    <%= f.hidden_field :album_id, value: params[:album_id] %>
+      <%= f.hidden_field :album_id, value: params[:album_id] %>
 
-    <div class="form-group text-left">
-      <%= f.label :caption %>
-      <%= f.text_area :caption, :class => "form-control" %>
-    </div>
+      <div class="form-group text-left">
+        <%= f.label :caption %>
+        <%= f.text_area :caption, :class => "form-control" %>
+      </div>
 
-    <div class="form-group text-left">
-      <%= f.label :image %>
-      <%= f.file_field :image, :class => "form-control" %>
-    </div>
+      <div class="form-group text-left">
+        <%= f.label :image %>
+        <%= f.file_field :image, :class => "form-control" %>
+      </div>
 
-    <div class=btn-group>
-      <%= f.submit "Upload", :class => "btn btn-primary" %>
-    </div>
-  <% end %>
+      <div class=btn-group>
+        <%= f.submit "Upload", :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 </div>
