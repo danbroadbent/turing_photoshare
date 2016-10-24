@@ -28,7 +28,7 @@ class AlbumsController < ApplicationController
 
   def destroy
     album_title = current_album.title
-    delete_album
+    current_album.destroy
     flash[:success] = "Album '#{album_title}' has been deleted."
     redirect_to my_albums_path
   end
@@ -41,12 +41,5 @@ class AlbumsController < ApplicationController
 
     def current_album
       Album.find(params[:id])
-    end
-
-    def delete_album
-      current_album.photos.delete_all
-      current_album.album_users.delete_all
-      current_album.comments.delete_all
-      current_album.delete
     end
 end
