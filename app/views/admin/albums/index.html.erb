@@ -1,0 +1,14 @@
+<div class="container">
+  <table class="table">
+    <tr>
+      <th>Album</th>
+    </tr>
+    <% @albums.each do |album| %>
+      <tr>
+        <td>
+          <p><%= link_to album.title, "/albums/#{album.id}" %></p>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

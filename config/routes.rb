@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'albums#index'
   get 'profile',        to: 'users#show',  as: 'user'
-  get 'dashbaord',      to: 'admin#index', as: 'dashboard'
+  get 'dashboard',      to: 'admin#index'
   get 'login',          to: 'sessions#new'
   post 'login',         to: 'sessions#create'
   delete 'logout',      to: 'sessions#destroy'
@@ -24,4 +24,8 @@ Rails.application.routes.draw do
   end
   resources :photos, only: [:show, :new, :create]
   resources :album_users, only: [:new, :create]
+
+  namespace :admin do
+    resources :albums, only: [:index]
+  end
 end

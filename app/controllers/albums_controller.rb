@@ -22,7 +22,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    redirect_to root_path unless current_album.permitted?(current_user)
+    redirect_to root_path unless current_album.permitted?(current_user) || admin_user?
     @album = current_album
   end
 
