@@ -34,4 +34,16 @@ RSpec.describe Album, type: :model do
     expect(album.display_users.first).to eq(users.first.username)
     expect(album.display_users.last).to eq(users.last.username)
   end
+
+  it "knows if a user has editing rights" do
+    authorized_users = Fabricate.times(2, :user)
+    unauthorized_user = Fabricate(:user)
+    album = Fabricate(:album)
+    album_user_1 = Fabricate(:album_user, user: authorized_users.first, album: album, owner: true)
+    album_user_2 = Fabricate(:album_user, user: authorized_users.last, album: album, owner: false)
+
+    expect(album.permitted?(authorized_users.first)).to eq(true)
+    expect(album.permitted?(authorized_users.last)).to eq(true)
+    expect(album.permitted?(unauthorized_user)).to eq(false)
+  end
 end

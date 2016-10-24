@@ -15,4 +15,8 @@ class Album < ApplicationRecord
   def display_users
     users.joins(:user_profile).pluck(:username)
   end
+
+  def permitted?(user)
+    users.include?(user)
+  end
 end

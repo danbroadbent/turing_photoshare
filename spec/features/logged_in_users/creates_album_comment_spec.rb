@@ -4,6 +4,7 @@ RSpec.feature "User adds comment to album" do
   scenario "logged in user comments on album" do
     user = Fabricate(:user)
     album = Fabricate(:album)
+    Fabricate(:album_user, user: user, album: album)
     stub_login_user(user)
 
     visit "/albums/#{album.id}"

@@ -22,14 +22,13 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    # redirect_to login_path if guest_accessing_private_album?
+    redirect_to root_path unless current_album.permitted?(current_user)
     @album = current_album
   end
 
   def destroy
     album_title = current_album.title
-    delete_photos
-    current_album.delete
+    delete_album
     flash[:success] = "Album '#{album_title}' has been deleted."
     redirect_to my_albums_path
   end
@@ -44,11 +43,10 @@ class AlbumsController < ApplicationController
       Album.find(params[:id])
     end
 
-    def delete_photos
-      current_album.photos.each { |photo| photo.delete }
+    def delete_album
+      current_album.photos.delete_all
+      current_album.album_users.delete_all
+      current_album.comments.delete_all
+      current_album.delete
     end
-
-    # def guest_accessing_private_album?
-    #   guest_user? && current_album.private?
-    # end
 end
