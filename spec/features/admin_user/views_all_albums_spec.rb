@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Admin user visits album dashboard" do
-  scenario "and clicks a private album link, and visits that album page" do
+  scenario "sees all albums and individual album page" do
     album = Fabricate(:album)
     stub_login_user Fabricate(:user, role: 1)
 

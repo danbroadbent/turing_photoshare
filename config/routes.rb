@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   post 'login',         to: 'sessions#create'
   delete 'logout',      to: 'sessions#destroy'
   get 'my_albums',      to: 'my_albums#index'
-  get 'album/comments/delete',   to: 'comments#destroy'
+  get 'album/comments/delete',    to: 'comments#destroy'
+  get 'admin/albums/delete',      to: 'admin/albums#destroy'
 
   namespace :api do
     namespace :v1 do
