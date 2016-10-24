@@ -14,6 +14,6 @@ RSpec.feature "User adds comment to album" do
     expect(current_path).to eq("/albums/#{album.id}")
     expect(page).to have_content('hello world')
     expect(page).to have_content(user.username)
-    expect(page).to have_content(Comment.last.created_at)
+    expect(page).to have_content("Created: less than a minute ago") 
   end
 end
