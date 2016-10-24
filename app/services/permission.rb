@@ -38,8 +38,6 @@ class Permission
       return true if controller == "sessions" && action.in?(%w(new create))
       return true if controller == "api/v1/comments" && action.in?(%w(create destroy edit update index))
       return true if controller == "confirmations" && action.in?(%w(new create))
-
-      # return true if controller == "confirmations" && action.in?(%w(new))
       false
     end
   end
