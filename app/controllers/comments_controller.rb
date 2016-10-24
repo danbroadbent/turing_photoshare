@@ -14,8 +14,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @album = Album.find(params[:album_id])
-
-    @album.comments.delete(params[:id])
+    @album.comments.delete(params[:comment_id])
 
     redirect_to album_path(@album)
   end

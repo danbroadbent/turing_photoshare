@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "User can delete own comments"  do
+RSpec.feature "User can modify comments"  do
   scenario "User creates comment, and deletes it" do
     user = Fabricate(:user)
     album = Fabricate(:album)
@@ -15,7 +15,7 @@ RSpec.feature "User can delete own comments"  do
     expect(page).to have_content('sup sup')
 
     within ".comment_tile" do
-      click_on "Delete Comment"
+      first('.delete-button').click
     end
 
     expect(current_path).to eq(album_path(album))
@@ -36,7 +36,7 @@ RSpec.feature "User can delete own comments"  do
     expect(page).to have_content('sup sup')
 
     within ".comment_tile" do
-      click_on "Edit Comment"
+      first('.edit-button').click
     end
 
     fill_in "Comment", with: 'back again'
