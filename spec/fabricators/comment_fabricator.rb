@@ -1,5 +1,5 @@
 Fabricator(:comment) do
-  user  nil
-  album nil
+  user
+  album 
   body  "MyText"
 end
