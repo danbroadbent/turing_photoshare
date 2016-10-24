@@ -41,9 +41,13 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <%= form_for ([@album, @album.comments.build]) do |f| %>
-            <%= f.label :body, 'Comment' %>
-            <%= f.text_area :body, :class => "form-control" %>
-            <%= f.submit "Add Comment", :class => "btn btn-primary"%>
+            <div class="form-group text-left">
+              <%= f.label :body, 'Comment' %>
+              <%= f.text_area :body, :class => "form-control" %>
+            </div>
+            <div class=btn-group>
+              <%= f.submit "Add Comment", :class => "btn btn-primary btn-sm"%>
+            </div>
           <% end %>
         </div>
       </div>
