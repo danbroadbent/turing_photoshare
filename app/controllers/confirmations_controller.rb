@@ -4,10 +4,9 @@ class ConfirmationsController < ApplicationController
   end
 
   def create
-    @user = current_user
+    @user = User.find(session[:user_id])
 
     if @user.verification_code == params[:verification_code]
-      # @user.confirm!
       session[:authenticated] = true
 
       flash[:notice] = "You are logged in as #{@user.username}. I hope you like pictures!!!"

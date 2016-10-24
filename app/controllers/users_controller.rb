@@ -5,7 +5,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user_profile = UserProfile.new(user: @user, username: params[:user][:user_profile][:username], phone_number: params[:user][:user_profile][:phone_number])
+    @user_profile = UserProfile.new(
+      user: @user,
+      username: params[:user][:user_profile][:username],
+      phone_number: params[:user][:user_profile][:phone_number])
     if @user.save && @user_profile.save
       session[:user_id] = @user.id
       ConfirmationSender.send_confirmation_to(@user)
@@ -20,9 +23,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
-    TokenSender.send_token_to(@user)
-    redirect_to '/profile'
+    if current_user.email
+      TokenSender.send_token_to(current_user)
+      flash[:success] = "Your API Token has been emailed to #{current_user.email}."
+      redirect_to user_path
+    else
+      flash[:danger] = "Token Generation Failed! Please add a valid email address."
+      redirect_to user_path
+    end
   end
 
   private
