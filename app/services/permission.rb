@@ -36,7 +36,7 @@ class Permission
       return true if controller == "albums" && action.in?(%w(index))
       return true if controller == "users" && action.in?(%w(new create))
       return true if controller == "sessions" && action.in?(%w(new create))
-      return true if controller == "api/v1/comments" && action.in?(%w(create destroy edit update index))
+      return true if controller == "api/v1/comments" && action.in?(%w(create destroy edit update index show))
 
       # return true if controller == "confirmations" && action.in?(%w(new))
       false
