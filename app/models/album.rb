@@ -19,4 +19,8 @@ class Album < ApplicationRecord
   def permitted?(user)
     users.include?(user)
   end
+
+  def permissions
+    public ? "Public" : "Private"
+  end
 end
