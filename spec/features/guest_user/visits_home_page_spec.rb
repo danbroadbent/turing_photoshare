@@ -4,6 +4,7 @@ RSpec.feature "Guest user visits home page" do
   it "and sees public albums" do
     user = Fabricate(:user)
     public_album = Fabricate(:album, public: true)
+    public_album.users << user
     Fabricate( :photo,
                album_id: public_album.id,
                user_id: user.id,

@@ -9,7 +9,8 @@ class Album < ApplicationRecord
   end
 
   def self.find_all_public
-    where(public: true)
+    left_outer_joins(:users).where("users.active = true").where(public: true)
+    # joins(:users).where("users.active = true").where(public: true)
   end
 
   def display_users
