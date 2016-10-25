@@ -28,13 +28,31 @@ RSpec.feature "Registered user logs in" do
     end
   end
 
+  context "submit incorrect password" do
+    it "routes them back to retry" do
+      user = Fabricate(:user)
+      Fabricate(:user_profile, user: user)
+      visit login_path
+      fill_in "Username", with: user.username
+      fill_in "Password", with: "GobbldyGook"
+      click_on "Submit"
+
+      expect(current_path).to eq(login_path)
+      within ".nav" do
+        expect(page).to have_content('Create Account')
+      end
+      within ".alert" do
+        expect(page).to have_content('Invalid Username or Password')
+      end
+    end
+  end
+
   context "don't submit a confirmation code" do
     it "redirects them to root" do
       VCR.use_cassette "login sad path" do
         user = Fabricate(:user)
         Fabricate(:user_profile, user: user)
-        visit root_path
-        click_on "Login"
+        visit login_path
         fill_in "Username", with: user.username
         fill_in "Password", with: user.password
         click_on "Submit"
