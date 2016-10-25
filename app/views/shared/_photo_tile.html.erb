@@ -4,7 +4,8 @@
       <div class="thumbnail">
         <%= image_tag photo.image %>
       </div>
-      <%= photo.caption %>
+      <%= photo.caption %>/<br>
+      <%= link_to 'Delete photo', photo_path(photo), method: :delete %>
     <% end %>
   </div>
 </div>
