@@ -1,14 +1,18 @@
 <div class="container">
-  <table class="table">
+  <table class="table table-hover">
     <tr>
       <th>Album</th>
     </tr>
     <% @albums.each do |album| %>
       <tr>
         <td>
-          <p><%= link_to album.title, "/albums/#{album.id}" %></p>
-          <a href="<%= edit_album_path(album) %>" class="edit-button btn btn-default btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-          <a href="/admin/albums/delete?id=<%= album.id %>" class="delete-button btn btn-default btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+          <div class="col-md-4">
+            <p><%= link_to album.title, "/albums/#{album.id}" %></p>
+          </div>
+          <div class="col-md-8">
+            <a href="<%= edit_album_path(album) %>" class="edit-button btn btn-default btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+            <a href="/admin/albums/delete?id=<%= album.id %>" class="delete-button btn btn-default btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+          </div>
         </td>
       </tr>
     <% end %>

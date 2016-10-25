@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table table-hover">
+    <tr>
+      <th>Users</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <div class="col-md-4">
+            <p><%= link_to user.username, admin_user_path(user) %></p>
+          </div>
+          <div class="col-md-8">
+            <a href="<%= edit_admin_user_path(user) %>" class="edit-button btn btn-default btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+            <a href="/admin/users/delete?id=<%= user.id %>" class="delete-button btn btn-default btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
