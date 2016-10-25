@@ -4,9 +4,11 @@
       <div class="thumbnail">
         <%= image_tag photo.image %>
       </div>
-      <%= photo.caption %>/<br>
-      <%= link_to 'Delete photo', photo_path(photo), method: :delete %>/<br>
-      <%= link_to 'Edit caption', edit_photo_path(photo) %>
+      <%= photo.caption %></br>
+      <% if @album.album_users.where(owner: true).where(user: current_user) == true %>
+        <%= link_to 'Delete photo', photo_path(photo), method: :delete %></br>
+        <%= link_to 'Edit caption', edit_photo_path(photo) %>
+      <% end %>
     <% end %>
   </div>
 </div>
