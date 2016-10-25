@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Comments edit" do
   it "edits a comment on an album" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     Fabricate(:album_user, user: user, album: album)
     comment = Fabricate(:comment, album: album)
@@ -15,7 +15,7 @@ RSpec.describe "Comments edit" do
   end
 
   it "edits a comment on an album with wrong token" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     Fabricate(:album_user, user: user, album: album)
     comment = Fabricate(:comment, album: album)

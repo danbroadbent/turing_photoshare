@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Comments post" do
   it "posts a comment to an album" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     Fabricate(:album_user, user: user, album: album)
     params = { body: 'this comment is soo cool'}
@@ -19,7 +19,7 @@ RSpec.describe "Comments post" do
   end
 
   it "posts fails to a comment to an unauthorized album" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     params = { body: 'this comment is soo cool'}
     post "/api/v1/albums/#{album.id}/comments.json?api_token=#{user.api_token}", params.to_json, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
@@ -30,7 +30,7 @@ RSpec.describe "Comments post" do
   end
 
   it "posts fails to a comment with an unauthorized token" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     params = { body: 'this comment is soo cool'}
     post "/api/v1/albums/#{album.id}/comments.json?api_token=777777", params.to_json, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
