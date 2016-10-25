@@ -33,6 +33,15 @@ class Api::V1::CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    if api_user && api_album.permitted?(api_user)
+      comment = Comment.delete(params[:id])
+      render :json => nil.to_json, :status => 204
+    else
+      render :json => {:error => 'forbidden'}.to_json, :status => 403
+    end
+  end
+
   private
   def api_user
     User.find_by(api_token: params[:api_token])
