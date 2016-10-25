@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :albums do
     resources :comments, only: [:create, :destroy, :edit, :update]
   end
-  resources :photos, only: [:show, :new, :create]
+  resources :photos, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :album_users, only: [:new, :create]
 
   namespace :admin do

@@ -14,6 +14,7 @@ class AlbumsController < ApplicationController
   def create
     @album = Album.new(album_params)
     @album.users << current_user
+    @album.album_users.update(owner: true)
     if @album.save
       redirect_to album_path(@album)
     else
