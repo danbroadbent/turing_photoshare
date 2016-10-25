@@ -30,4 +30,9 @@ RSpec.describe User, type: :model do
     expect(user).to eq(user_new)
     expect(user).to_not eq(another_user)
   end
+
+  it "knows if it is inactive" do
+    user = Fabricate(:user, active: false)
+    expect(user.inactive?).to eq(true)
+  end
 end

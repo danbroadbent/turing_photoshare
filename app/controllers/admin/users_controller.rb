@@ -4,10 +4,16 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+    @user = this_user
+    @user_profile = @user.user_profile
   end
 
   def show
     @user = this_user
+  end
+
+  def update
+    redirect_to admin_user_path(this_user)
   end
 
   # def destroy
