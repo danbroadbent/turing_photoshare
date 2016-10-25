@@ -22,7 +22,7 @@ class Permission
       false
     elsif user.registered?
       return true if controller == "home" && action.in?(%w(index))
-      return true if controller == "albums" && action.in?(%w(index show new create destroy))
+      return true if controller == "albums" && action.in?(%w(index show new create destroy edit update))
       return true if controller == "users" && action.in?(%w(show update))
       return true if controller == "confirmations" && action.in?(%w(new create))
       return true if controller == "comments" && action.in?(%w(create destroy edit update))

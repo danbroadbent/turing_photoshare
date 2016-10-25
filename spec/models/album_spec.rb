@@ -46,4 +46,12 @@ RSpec.describe Album, type: :model do
     expect(album.permitted?(authorized_users.last)).to eq(true)
     expect(album.permitted?(unauthorized_user)).to eq(false)
   end
+
+  it "knows if it is public or private" do
+    album_1 = Fabricate(:album, public: false)
+    album_2 = Fabricate(:album, public: true)
+
+    expect(album_1.permissions).to eq("Private")
+    expect(album_2.permissions).to eq("Public")
+  end
 end
