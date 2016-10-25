@@ -5,8 +5,11 @@ RSpec.describe "Comments post" do
     user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     Fabricate(:album_user, user: user, album: album)
-    params = { body: 'this comment is soo cool'}
-    post "/api/v1/albums/#{album.id}/comments.json?api_token=#{user.api_token}", params.to_json, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+
+    params = { 'body' => 'this comment is soo cool',
+               'CONTENT_TYPE' => 'application/json',
+               'ACCEPT' => 'application/json' }
+    post "/api/v1/albums/#{album.id}/comments.json?api_token=#{user.api_token}", params: params
 
     comment_response = JSON.parse(response.body)
 
@@ -21,8 +24,11 @@ RSpec.describe "Comments post" do
   it "posts fails to a comment to an unauthorized album" do
     user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
-    params = { body: 'this comment is soo cool'}
-    post "/api/v1/albums/#{album.id}/comments.json?api_token=#{user.api_token}", params.to_json, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+
+    params = { 'body' => 'this comment is soo cool',
+               'CONTENT_TYPE' => 'application/json',
+               'ACCEPT' => 'application/json' }
+    post "/api/v1/albums/#{album.id}/comments.json?api_token=#{user.api_token}", params: params
 
     comment_response = JSON.parse(response.body)
 
@@ -33,7 +39,11 @@ RSpec.describe "Comments post" do
     user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     params = { body: 'this comment is soo cool'}
-    post "/api/v1/albums/#{album.id}/comments.json?api_token=777777", params.to_json, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+
+    params = { 'body' => 'this comment is soo cool',
+               'CONTENT_TYPE' => 'application/json',
+               'ACCEPT' => 'application/json' }
+    post "/api/v1/albums/#{album.id}/comments.json?api_token=#{user.api_token}", params: params
 
     comment_response = JSON.parse(response.body)
 

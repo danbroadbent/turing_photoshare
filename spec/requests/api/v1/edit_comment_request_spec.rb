@@ -7,8 +7,10 @@ RSpec.describe "Comments edit" do
     Fabricate(:album_user, user: user, album: album)
     comment = Fabricate(:comment, album: album)
 
-    params = { body: 'this comment is soo cool'}
-    patch "/api/v1/albums/#{album.id}/comments/#{comment.id}.json?api_token=#{user.api_token}", params.to_json, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+    params = { 'body' => 'this comment is soo cool',
+               'CONTENT_TYPE' => 'application/json',
+               'ACCEPT' => 'application/json' }
+    patch "/api/v1/albums/#{album.id}/comments/#{comment.id}.json?api_token=#{user.api_token}", params: params
 
     comment_response = JSON.parse(response.body)
 
@@ -26,8 +28,10 @@ RSpec.describe "Comments edit" do
     Fabricate(:album_user, user: user, album: album)
     comment = Fabricate(:comment, album: album)
 
-    params = { body: 'this comment is soo cool'}
-    patch "/api/v1/albums/#{album.id}/comments/#{comment.id}.json?api_token=#{SecureRandom.hex}", params.to_json, { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+    params = { 'body' => 'this comment is soo cool',
+               'CONTENT_TYPE' => 'application/json',
+               'ACCEPT' => 'application/json' }
+    patch "/api/v1/albums/#{album.id}/comments/#{comment.id}.json?api_token=#{SecureRandom.hex}", params: params
 
     comment_response = JSON.parse(response.body)
 
