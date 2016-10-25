@@ -7,6 +7,7 @@
       <tr>
         <td>
           <p><%= link_to album.title, "/albums/#{album.id}" %></p>
+          <a href="<%= edit_album_path(album) %>" class="edit-button btn btn-default btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
           <a href="/admin/albums/delete?id=<%= album.id %>" class="delete-button btn btn-default btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
         </td>
       </tr>

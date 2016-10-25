@@ -12,4 +12,6 @@
  *
  *= require_self
  *= require main
+ *= require bootstrap-switch
+ *= require bootstrap-switch.min
  */
