@@ -8,15 +8,16 @@ Rails.application.routes.draw do
   get 'my_albums',      to: 'my_albums#index'
   get 'album/comments/delete',   to: 'comments#destroy'
 
+
   namespace :api do
     namespace :v1 do
       resources :albums, only: [:show] do
-        resources :comments
+        resources :comments, except: [:edit, :new]
       end
     end
   end
 
-  resources :users, only: [:new, :create, :update]
+  resources :users, only: [:new, :create, :update, :edit]
   resources :user_profiles, only: [:edit, :update]
   resources :confirmations, only: [:new, :create]
   resources :albums, only: [:index, :show, :new, :create, :destroy] do

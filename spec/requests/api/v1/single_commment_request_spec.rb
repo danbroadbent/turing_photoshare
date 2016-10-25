@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Comments CRUD API" do
   it "returns a comment to authenticated user" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     Fabricate(:album_user, user: user, album: album)
     comment_1 = Fabricate(:comment, album: album)
@@ -19,7 +19,7 @@ RSpec.describe "Comments CRUD API" do
   end
 
   it "returns 403 if user doesn't have access to the requested album" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     comment_1 = Fabricate(:comment, album: album)
 
@@ -31,7 +31,7 @@ RSpec.describe "Comments CRUD API" do
   end
 
   it "returns 403 if user doesn't have authoized token" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     comment_1 = Fabricate(:comment, album: album)
 

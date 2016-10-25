@@ -12,8 +12,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row btn-group">
     <%= link_to "Edit profile", edit_user_profile_path(@user.user_profile), class: "btn btn-primary" %>
+    <%= link_to "Generate API Token", "/users/#{@user.id}", method: :patch, class: "btn btn-default" %>
   </div>
 
 </div>
