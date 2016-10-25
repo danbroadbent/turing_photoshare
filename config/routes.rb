@@ -9,15 +9,16 @@ Rails.application.routes.draw do
   get 'album/comments/delete',    to: 'comments#destroy'
   get 'admin/albums/delete',      to: 'admin/albums#destroy'
 
+
   namespace :api do
     namespace :v1 do
       resources :albums, only: [:show] do
-        resources :comments, only: [:create, :destroy, :edit, :update, :index]
+        resources :comments, except: [:edit, :new]
       end
     end
   end
 
-  resources :users, only: [:new, :create, :update]
+  resources :users, only: [:new, :create, :update, :edit]
   resources :user_profiles, only: [:edit, :update]
   resources :confirmations, only: [:new, :create]
   resources :albums do

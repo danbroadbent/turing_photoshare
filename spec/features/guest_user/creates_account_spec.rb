@@ -58,4 +58,24 @@ RSpec.feature "Guest user creates account" do
       end
     end
   end
+
+  context "they don't type in the verification code" do
+    it "they are taken back to retry" do
+      VCR.use_cassette("create account sad path") do
+        visit new_user_path
+        fill_in 'Username', with: 'calaway'
+        fill_in 'Phone number', with: ENV['MY_PHONE_NUMBER']
+        fill_in 'Password', with: 'password'
+        fill_in 'Password confirmation', with: 'password'
+        click_on 'Create New Account'
+
+        visit my_albums_path
+
+        expect(current_path).to eq(root_path)
+        within ".nav" do
+          expect(page).to have_content('Create Account')
+        end
+      end
+    end
+  end
 end

@@ -28,6 +28,6 @@
       <%= f.submit "Update", :class => "btn btn-primary" %>
     </div>
     <% end %>
-    <%= link_to "Generate token", new_user_path, method: :patch %>
+    <%= link_to "Generate token", new_user_path(current_user), method: :patch %>
   </div>
 </div>
