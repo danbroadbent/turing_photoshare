@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Comments CRUD API" do
   it "returns a list of comments to authnticated user" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     Fabricate(:album_user, user: user, album: album)
     comment_1 = Fabricate(:comment, album: album, user: user)
@@ -17,7 +17,7 @@ RSpec.describe "Comments CRUD API" do
   end
 
   it "fails to return list if not authorized to access album" do
-    user = Fabricate(:user, api_token: '12345')
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     comment_1 = Fabricate(:comment, album: album, user: user)
     comment_2 = Fabricate(:comment, album: album, user: user)
@@ -30,13 +30,13 @@ RSpec.describe "Comments CRUD API" do
   end
 
   it "fails to return list if token is incorrect" do
-    user = Fabricate(:user, api_token: "435342")
+    user = Fabricate(:user, api_token: SecureRandom.hex)
     album = Fabricate(:album)
     Fabricate(:album_user, user: user, album: album)
     comment_1 = Fabricate(:comment, album_id: album.id, user: user)
     comment_2 = Fabricate(:comment, album_id: album.id, user: user)
 
-    get "/api/v1/albums/#{album.id}/comments.json?api_token=93h4573"
+    get "/api/v1/albums/#{album.id}/comments.json?api_token=#{SecureRandom.hex}"
 
     parsed_comments = JSON.parse(response.body)
 

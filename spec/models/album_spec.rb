@@ -31,8 +31,8 @@ RSpec.describe Album, type: :model do
     album_user_2 = Fabricate(:album_user, user: users.last, album: album)
 
     expect(album.display_users.count).to eq(2)
-    expect(album.display_users.first).to eq(users.first.username)
-    expect(album.display_users.last).to eq(users.last.username)
+    expect(album.display_users).to include(users.first.username)
+    expect(album.display_users).to include(users.last.username)
   end
 
   it "knows if a user has editing rights" do
