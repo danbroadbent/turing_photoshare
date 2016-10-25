@@ -5,7 +5,7 @@
         <%= image_tag photo.image %>
       </div>
       <%= photo.caption %></br>
-      <% if @album.album_users.where(owner: true).where(user: current_user) == true %>
+      <% if @album.owner?(current_user) %>
         <%= link_to 'Delete photo', photo_path(photo), method: :delete %></br>
         <%= link_to 'Edit caption', edit_photo_path(photo) %>
       <% end %>
