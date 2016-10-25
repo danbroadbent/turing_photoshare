@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   delete 'logout',      to: 'sessions#destroy'
   get 'my_albums',      to: 'my_albums#index'
   get 'album/comments/delete',   to: 'comments#destroy'
-  
+
 
   namespace :api do
     namespace :v1 do
       resources :albums, only: [:show] do
-        resources :comments
+        resources :comments, except: [:edit, :new]
       end
     end
   end
