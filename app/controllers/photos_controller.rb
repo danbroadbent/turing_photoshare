@@ -25,6 +25,17 @@ class PhotosController < ApplicationController
 
   end
 
+  def edit
+    @photo = Photo.find(params[:id])
+  end
+
+  def update
+    @photo = Photo.find(params[:id])
+    @album = @photo.album
+    @photo.update(photo_params)
+    redirect_to album_path(@album)
+  end
+
   def destroy
     @photo = Photo.find(params[:id])
     @album = @photo.album
@@ -35,7 +46,7 @@ class PhotosController < ApplicationController
 
   private
 
-    # def photo_params
-    #   params.require(:photo).permit(:image, :caption, :album_id, :user_id)
-    # end
+    def photo_params
+      params.require(:photo).permit(:caption)
+    end
 end

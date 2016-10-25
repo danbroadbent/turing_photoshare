@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "user deletes photo" do
+RSpec.feature "user edits photo" do
   scenario "from album page" do
     user = Fabricate(:user)
     album = Fabricate(:album)
@@ -14,9 +14,16 @@ RSpec.feature "user deletes photo" do
     expect(page).to have_content("Here I am")
 
     within ".photo_tile" do
-      click_on 'Delete photo'
+      click_on 'Edit caption'
     end
 
-    expect(page).to_not have_content("Here I am")
+    expect(current_path).to eq(edit_photo_path(photo))
+
+    fill_in "Caption", with: "I edited this photo"
+    click_on "Edit Caption"
+
+    expect(current_path).to eq(album_path(album))
+
+    expect(page).to have_content("I edited this photo")
   end
 end
