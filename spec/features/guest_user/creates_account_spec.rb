@@ -6,6 +6,9 @@ RSpec.feature "Guest user creates account" do
       VCR.use_cassette("create account") do
         visit '/'
         click_on "Create Account"
+
+        expect(current_path).to eq(new_user_path)
+        
         fill_in 'Username', with: 'calaway'
         fill_in 'Phone number', with: ENV['MY_PHONE_NUMBER']
         fill_in 'Password', with: 'password'

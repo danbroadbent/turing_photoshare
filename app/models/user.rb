@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one :user_profile
 
   enum role: %w(registered admin)
-  before_validation :set_role, :set_active
+  before_validation :set_role
 
   extend Forwardable
 
@@ -22,17 +22,13 @@ class User < ApplicationRecord
     self.role ||= 0
   end
 
-  def set_active
-    self.active ||= true
-  end
-
-  def admin?
-    self.role == "admin"
-  end
-
-  def registered?
-    self.role == "registered"
-  end
+  # def admin?
+  #   self.role == "admin"
+  # end
+  #
+  # def registered?
+  #   self.role == "registered"
+  # end
 
   def inactive?
     !active
