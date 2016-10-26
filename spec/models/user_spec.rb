@@ -35,4 +35,12 @@ RSpec.describe User, type: :model do
     user = Fabricate(:user, active: false)
     expect(user.inactive?).to eq(true)
   end
+
+  it "has a status of inactive if it is inactive" do
+    user = Fabricate(:user, active: false)
+    expect(user.status).to eq("Inactive")
+
+    user = Fabricate(:user)
+    expect(user.status).to eq("Active")
+  end
 end

@@ -32,4 +32,8 @@ class User < ApplicationRecord
   def inactive?
     !active
   end
+
+  def status
+    active ? "Active" : "Inactive"
+  end
 end

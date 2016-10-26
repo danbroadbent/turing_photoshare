@@ -12,9 +12,9 @@ RSpec.feature "logged in user edits album" do
     click_link "Edit Album"
     expect(current_path).to eq(edit_album_path(album))
 
-    first('input#hidden-permission', visible: false).set(true)
+    find(:css, "#album_public").set(true)
     click_button "Update"
-    
+
     expect(current_path).to eq(album_path(album))
     expect(page).to have_content("Permissions: Public")
   end

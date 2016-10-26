@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Admin user visits users dashboard" do
-  scenario "and can edit a single album" do
+  scenario "and can edit a single user" do
     user = Fabricate(:user)
     Fabricate(:user_profile, user: user)
     stub_login_user Fabricate(:user, role: 1)
@@ -13,7 +13,7 @@ RSpec.feature "Admin user visits users dashboard" do
     first('.edit-button').click
     expect(current_path).to eq(edit_admin_user_path(user))
 
-    first('input#hidden-status', visible: false).set(false)
+    find(:css, "#user_active").set(false)
     click_button "Update"
 
     expect(current_path).to eq(admin_user_path(user))

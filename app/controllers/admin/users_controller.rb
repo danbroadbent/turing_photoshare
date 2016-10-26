@@ -13,6 +13,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    this_user.update(role: set_role)
+    this_user.update(active: set_active)
+    this_user.update(password: params[:pasword])
+    this_user.user_profile.update(username: params[:username])
+    this_user.user_profile.update(email: params[:email])
+    this_user.user_profile.update(phone_number: params[:phone_number])
+    this_user.user_profile.update(bio: params[:bio])
     redirect_to admin_user_path(this_user)
   end
 
@@ -31,5 +38,13 @@ class Admin::UsersController < ApplicationController
 
     def this_user
       User.find(params[:id])
+    end
+
+    def set_role
+      params[:user][:role] ? 1 : 0
+    end
+
+    def set_active
+      params[:user][:active] == true
     end
 end

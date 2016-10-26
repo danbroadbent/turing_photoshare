@@ -1,6 +1,8 @@
 <h3><%= user.username %></h3>
+<% if user.inactive? %>
+  <h4 class="small">Status: <%= user.status %></h4>
+<% end %>
 <h5>Profile info:</h5>
-<% if user.active %>
 <div class="row">
   <div class="col-md-6">
     <table class="table">
