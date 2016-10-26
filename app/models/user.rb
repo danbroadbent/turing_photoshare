@@ -29,4 +29,12 @@ class User < ApplicationRecord
   def registered?
     self.role == "registered"
   end
+
+  def inactive?
+    !active
+  end
+
+  def status
+    active ? "Active" : "Inactive"
+  end
 end
