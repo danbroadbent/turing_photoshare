@@ -17,7 +17,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'google-cloud'
 gem 'carrierwave'
 gem 'fog'
-gem 'google-cloud-error_reporting'
+# gem 'google-cloud-error_reporting'
 # gem 'googleauth'
 
 group :test do
