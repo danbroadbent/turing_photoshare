@@ -11,14 +11,7 @@
       <%= f.text_area :description, value: album.description, class: "form-control" %>
     </div>
 
-    <div class="form-group text-left">
-      <label for="switch">Album Premissions</label>
-      <div class="toggle-switch">
-        <input id="switch" type="checkbox" name="access" checked="false" data-size="large" data-on-text="Private" data-off-text="Public">
-      </div>
-    </div>
-
-    <%= f.hidden_field :public, id: "hidden-permission" %>
+    <%= f.check_box :public, :data => { :size => 'large', 'on-text' => 'Public', 'off-text' => 'Private'} %>
 
     <div class=btn-group>
       <%= f.submit class: "btn btn-primary" %>
@@ -27,12 +20,7 @@
 </div>
 
 <script type="text/javascript">
-
-  $("[name='access']").bootstrapSwitch('state', $('#hidden-permission').val())
-
-  $('input[name="access"]').on('switchChange.bootstrapSwitch', function(event, state) {
-    $('#hidden-permission').val(!state)
-    console.log($('#hidden-permission').val())
+  $(document).ready(function() {
+    $('#album_public').bootstrapSwitch('state', <%= album.public %>)
   });
-
 </script>

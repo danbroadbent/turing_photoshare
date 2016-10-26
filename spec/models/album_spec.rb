@@ -17,6 +17,7 @@ RSpec.describe Album, type: :model do
   it "can find all public albums" do
     private_album = Fabricate(:album)
     public_album = Fabricate(:album, public: true)
+    Fabricate(:user).albums.push(private_album, public_album)
 
     expect(Album.find_all_public.count).to eq(1)
     expect(Album.find_all_public.first).to eq(public_album)

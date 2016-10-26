@@ -19,7 +19,8 @@ class Permission
       return true if controller == "album_users" && action.in?(%w(new create))
       return true if controller == "admin" && action.in?(%w(index))
       return true if controller == "admin/albums" && action.in?(%w(index destroy))
-      return true if controller == "admin/users" && action.in?(%w(index edit show))
+      return true if controller == "album/download" && action.in?(%w(index))
+      return true if controller == "admin/users" && action.in?(%w(index edit show update))
       false
     elsif user.registered?
       return true if controller == "home" && action.in?(%w(index))
@@ -32,6 +33,7 @@ class Permission
       return true if controller == "sessions" && action.in?(%w(destroy))
       return true if controller == "user_profiles" && action.in?(%w(edit update))
       return true if controller == "album_users" && action.in?(%w(new create))
+      return true if controller == "album/download" && action.in?(%w(index))
       false
     else
       return true if controller == "albums" && action.in?(%w(index))

@@ -1,10 +1,6 @@
 class AlbumsController < ApplicationController
   def index
-    if current_user
-      @albums = current_user.albums
-    else
-      @albums = Album.find_all_public
-    end
+    @albums = Album.find_all_public
   end
 
   def new

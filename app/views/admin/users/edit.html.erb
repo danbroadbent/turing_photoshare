@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <h3>Edit User</h3>
+
+    <%= form_tag(admin_user_path(@user), method: "PATCH")do %>
+      <div class="form-group text-left">
+        <%= label_tag :username %>
+        <%= text_field_tag 'username', @user.username, class: 'form-control' %>
+      </div>
+
+      <div class="form-group text-left">
+        <%= label_tag :password %>
+        <%= text_field_tag 'password', nil, class: 'form-control' %>
+      </div>
+
+      <div class="form-group text-left">
+        <%= label_tag :email %>
+        <%= text_field_tag 'email', @user.email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group text-left">
+        <%= label_tag :phone_number %>
+        <%= text_field_tag 'phone_number', @user.phone_number, class: 'form-control' %>
+      </div>
+
+      <div class="form-group text-left">
+        <%= label_tag :bio %>
+        <%= text_area_tag 'bio', @user.user_profile.bio, class: 'form-control' %>
+      </div>
+
+      <div class="form-group text-center">
+        <%= check_box 'user', 'role', {data: {size: "large", on_text: "Admin", off_text: "Default"}}, 'true', 'false' %>
+        <%= check_box 'user', 'active', {data: {size: "large", on_text: "Active", off_text: "Deactive"}}, 'true', 'false' %>
+      </div>
+
+      <div class=btn-group>
+        <%= submit_tag "Update", :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#user_active').bootstrapSwitch('state', <%= @user.active %>)
+    $('#user_role').bootstrapSwitch('state', <%= @user.admin? %>)
+    $('#user_role').on('switchChange.bootstrapSwitch', function(event, state) {
+      console.log(state)
+    });
+    $('#user_active').on('switchChange.bootstrapSwitch', function(event, state) {
+      console.log(state)
+    });
+  });
+</script>

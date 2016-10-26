@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.0'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
@@ -16,7 +17,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'google-cloud'
 gem 'carrierwave'
 gem 'fog'
-# gem 'googleauth'
+gem 'rubyzip'
+gem 'zip-zip'
 
 group :test do
   gem 'vcr'
@@ -33,6 +35,7 @@ group :development, :test do
   gem 'fabrication'
   gem 'pry-rails'
   gem 'simplecov', require: false
+  gem "binding_of_caller"
 end
 
 group :development do
