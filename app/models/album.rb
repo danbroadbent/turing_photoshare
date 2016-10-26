@@ -4,7 +4,7 @@ class Album < ApplicationRecord
   has_many :album_users, dependent: :destroy
   has_many :users, through: :album_users
 
-  scope :active, -> { joins(:users).where("users.active = ?", true) }
+  scope :active, -> { joins(:album_users).merge(AlbumUser.owned_active) }
 
 
   def private?

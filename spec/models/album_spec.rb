@@ -56,7 +56,7 @@ RSpec.describe Album, type: :model do
     expect(album_2.permissions).to eq("Public")
   end
 
-  it "can be scoped to albums belonging to active users" do
+  it "can be scope to active albums" do
     expected_album = Fabricate(:album)
     other_album = Fabricate(:album)
 
@@ -66,8 +66,6 @@ RSpec.describe Album, type: :model do
     Fabricate(:album_user, user: active_user, album: expected_album, owner: true)
     Fabricate(:album_user, user: active_user, album: other_album)
     Fabricate(:album_user, user: deactive_user, album: other_album, owner: true)
-
-    binding.pry
 
     expect(Album.count).to eq(2)
     expect(Album.active.count).to eq(1)
