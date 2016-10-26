@@ -5,7 +5,7 @@ RSpec.feature "user edits photo" do
     user = Fabricate(:user)
     album = Fabricate(:album)
     photo = Fabricate(:photo, caption: "Here I am", user: user, album: album)
-    Fabricate(:album_user, user: user, album: album)
+    Fabricate(:album_user, user: user, album: album, owner: true)
     stub_login_user(user)
 
     visit album_path(album)
