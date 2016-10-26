@@ -62,6 +62,23 @@ RSpec.feature "Guest user creates account" do
     end
   end
 
+    context "they enter wrong password confirmation" do
+      it "they are taken back to retry" do
+        visit '/'
+        click_on "Create Account"
+        fill_in 'Username', with: 'Chasering'
+        fill_in 'Phone number', with: ENV['MY_PHONE_NUMBER']
+        fill_in 'Password', with: 'alpha'
+        fill_in 'Password confirmation', with: 'beta'
+        click_on 'Create New Account'
+
+        expect(current_path).not_to eq(new_confirmation_path)
+        within "h1" do
+          expect(page).to have_content('Create Account')
+      end
+    end
+  end
+
   context "they don't type in the verification code" do
     it "they are taken back to retry" do
       VCR.use_cassette("create account sad path") do
