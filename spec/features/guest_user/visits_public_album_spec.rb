@@ -16,7 +16,7 @@ RSpec.feature "Guest user visits a public album page" do
 
     within ".photo_tile" do
       expect(page).to have_css("img")
-      expect(page).to have_content(public_album.description)
+      expect(page).to have_content(public_album.description.split()[0..3].join(" "))
     end
   end
 end
