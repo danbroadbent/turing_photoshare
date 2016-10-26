@@ -16,6 +16,7 @@
           <%= link_to "Add Photo", new_photo_path(album_id: @album.id), class: "btn btn-default btn-sm" %>
         <% end %>
         <%= link_to "Share Album", new_album_user_path(album_id: @album.id), class: "btn btn-default btn-sm" %>
+        <%= link_to "Download Album", album_download_path(album: @album), class: "btn btn-default btn-sm" %>
         <%= link_to "Edit Album", edit_album_path(@album), class: "btn btn-default btn-sm" %>
         <%= render 'shared/album_delete' %>
       </div>
