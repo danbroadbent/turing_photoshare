@@ -7,9 +7,6 @@ class CommentsController < ApplicationController
 
       @comment.save
       redirect_to album_path(@album)
-    # else
-    #   flash.now[:danger] = "error posting comment"
-    # end
   end
 
   def destroy
