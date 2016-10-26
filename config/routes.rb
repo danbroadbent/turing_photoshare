@@ -30,6 +30,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :albums, only: [:index]
-    resources :users, only: [:index, :edit, :show]
+    resources :users, only: [:index, :edit, :show, :update]
   end
 end
