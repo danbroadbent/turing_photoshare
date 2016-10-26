@@ -1,0 +1,12 @@
+<div class="col-md-6 col-md-offset-3 text-center">
+  <%= form_for @photo do |f| %>
+    <div class="form-group text-left">
+      <%= f.label :caption %>
+      <%= f.text_field :caption, value: @photo.caption, class: "form-control" %>
+    </div>
+
+    <div class=btn-group>
+      <%= f.submit "Edit Caption", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

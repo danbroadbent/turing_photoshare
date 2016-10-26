@@ -16,6 +16,11 @@ class Album < ApplicationRecord
     users.joins(:user_profile).pluck(:username)
   end
 
+  def owner?(user)
+    !album_users.where(owner: true).where(user: user).empty?
+  end
+
+
   def permitted?(user)
     users.include?(user)
   end

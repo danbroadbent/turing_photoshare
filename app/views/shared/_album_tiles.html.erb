@@ -2,7 +2,17 @@
   <% if !albums.empty? %>
     <% albums.each do |album| %>
       <%= link_to album.title, album_path(album) %>
-      <%= render 'shared/photo_tile', photo: album.photos.first %>
+      <% photo = album.photos.first %>
+      <div class="container col-md-3">
+        <div class="photo_tile well">
+          <% if photo %>
+            <div class="thumbnail">
+              <%= image_tag photo.image %>
+            </div>
+            <%= album.description.truncate_words(10) %></br>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   <% end %>
   <% if current_user %>
