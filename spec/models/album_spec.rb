@@ -57,14 +57,20 @@ RSpec.describe Album, type: :model do
   end
 
   it "can be scoped to albums belonging to active users" do
-    album_1 = Fabricate(:album)
-    album_2 = Fabricate(:album)
+    expected_album = Fabricate(:album)
+    other_album = Fabricate(:album)
 
-    user_1 = Fabricate(:user, active: false)
-    Fabricate(:album_user, user: user_1, album: album_1, owner: true)
+    active_user = Fabricate(:user, active: true)
+    deactive_user = Fabricate(:user, active: false)
+
+    Fabricate(:album_user, user: active_user, album: expected_album, owner: true)
+    Fabricate(:album_user, user: active_user, album: other_album)
+    Fabricate(:album_user, user: deactive_user, album: other_album, owner: true)
+
     binding.pry
+
     expect(Album.count).to eq(2)
     expect(Album.active.count).to eq(1)
-    expect(Album.active.first).to eq(album_2)
+    expect(Album.active.first).to eq(expected_album)
   end
 end
