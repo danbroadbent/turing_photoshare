@@ -14,7 +14,7 @@ class Album::DownloadController < ApplicationController
         zos.print contents
       end
     end
-    
+
     compressed_filestream.rewind
     send_data compressed_filestream.read, filename: "#{album.title}.zip"
   end
