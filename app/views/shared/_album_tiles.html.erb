@@ -2,7 +2,21 @@
   <% if !albums.empty? %>
     <% albums.each do |album| %>
       <%= link_to album.title, album_path(album) %>
-      <%= render 'shared/photo_tile', photo: album.photos.first %>
+      <% photo = album.photos.first %>
+      <div class="container col-md-3">
+        <div class="photo_tile well">
+          <% if photo %>
+            <div class="thumbnail">
+              <%= image_tag photo.image %>
+            </div>
+            <%= photo.caption %></br>
+            <% if album.owner?(current_user) %>
+              <%= link_to 'Delete photo', photo_path(photo), method: :delete %></br>
+              <%= link_to 'Edit caption', edit_photo_path(photo) %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   <% end %>
   <% if current_user %>
