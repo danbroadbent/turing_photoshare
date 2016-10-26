@@ -14,7 +14,8 @@ class User < ApplicationRecord
   def_delegators :user_profile, :username, :phone_number, :email
 
   def self.find_by_username(username)
-    find(UserProfile.find_by(username: username).user_id)
+    profile = UserProfile.find_by(username: username) || UserProfile.new
+    profile.user || User.new
   end
 
   def set_role
