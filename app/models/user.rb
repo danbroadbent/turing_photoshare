@@ -39,4 +39,18 @@ class User < ApplicationRecord
   def status
     active ? "Active" : "Inactive"
   end
+
+  def active_albums
+    binding.pry
+    # albums.merge(Album.active)
+    # Album.joins(:users).where("users.active = true").joins(:album_users).where("album_users.owner = true").distinct
+
+
+    # album users
+      # album id = int
+      # user id = int
+      # view = true / false
+      # own = true / false
+
+  end
 end
