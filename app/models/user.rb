@@ -22,14 +22,6 @@ class User < ApplicationRecord
     self.role ||= 0
   end
 
-  def admin?
-    self.role == "admin"
-  end
-
-  def registered?
-    self.role == "registered"
-  end
-
   def inactive?
     !active
   end
