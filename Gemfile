@@ -17,8 +17,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'google-cloud'
 gem 'carrierwave'
 gem 'fog'
-# gem 'google-cloud-error_reporting'
-# gem 'googleauth'
+gem 'rubyzip'
+gem 'zip-zip'
 
 group :test do
   gem 'vcr'
@@ -35,6 +35,7 @@ group :development, :test do
   gem 'fabrication'
   gem 'pry-rails'
   gem 'simplecov', require: false
+  gem "binding_of_caller"
 end
 
 group :development do
