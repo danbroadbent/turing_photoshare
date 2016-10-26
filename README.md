@@ -9,25 +9,25 @@
   * With our comments API, you can READ, CREATE, UPDATE, and DELETE your own album comments.
 
   * Read Example for all of your comments:
-    - GET turingphotoshare.heroku.com/api/v1/albums/album_id/comments.json?parameters
+    - GET turingphotoshare.heroku.com/api/v1/albums/INSERT ALBUM_ID HERE/comments.json?api_token="Your_api_token_here"
       * Required parameters: api_token
 
   * Read Example for a single comment:
-    - GET turingphotoshare.heroku.com/api/v1/albums/album_id/comment_id.json?parameters
+    - GET turingphotoshare.heroku.com/api/v1/albums/INSERT ALBUM_ID HERE/INSERT COMMENT_ID HERE.json?api_token="Your_api_token_here"
       * Required parameters: api_token
 
   * Create Example:
-    - POST turingphotoshare.heroku.com/api/v1/albums/album_id/comments.json?parameters
+    - POST turingphotoshare.heroku.com/api/v1/albums/INSERT ALBUM_ID HERE/comments.json?api_token="Your_api_token_here"&body="insert body of comment here"&CONTENT_TYPE='application/json'&ACCEPT='application/json'
       * Required parameters: api_token, body(body of your comment as a string),
                              CONTENT_TYPE = 'application/json'
                              ACCEPT = 'application/json'
 
   * Update Example:
-    - PATCH turingphotoshare.heroku.com/api/v1/albums/album_id/comment_id.json?parameters
+    - PATCH turingphotoshare.heroku.com/api/v1/albums/INSERT ALBUM_ID HERE/INSERT COMMENT_ID HERE.json?api_token="Your_api_token_here"&body="insert body of comment here"&CONTENT_TYPE='application/json'&ACCEPT='application/json'
       * Required parameters: api_token, body(body of your comment as a string),
                              CONTENT_TYPE = 'application/json'
                              ACCEPT = 'application/json'
 
   * Delete Example:
-    - DELETE turingphotoshare.heroku.com/api/v1/albums/album_id/comment_id.json?parameters
+    - DELETE turingphotoshare.heroku.com/api/v1/albums/INSERT ALBUM_ID HERE/INSERT COMMENT_ID HERE.json?api_token="Your_api_token_here"
       * Required parameters: api_token
