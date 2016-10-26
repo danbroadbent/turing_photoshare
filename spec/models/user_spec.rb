@@ -43,4 +43,13 @@ RSpec.describe User, type: :model do
     user = Fabricate(:user)
     expect(user.status).to eq("Active")
   end
+
+  it "can return only active users" do
+    user = Fabricate(:user, active: true)
+    Fabricate(:user, active: false)
+
+    expect(User.count).to eq(2)
+    expect(User.active.count).to eq(1)
+    expect(User.active.first).to eq(user)
+  end
 end

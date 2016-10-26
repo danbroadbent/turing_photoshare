@@ -4,6 +4,9 @@ class Album < ApplicationRecord
   has_many :album_users, dependent: :destroy
   has_many :users, through: :album_users
 
+  # scope :active, -> { where(submitted: true) }
+  
+
   def private?
     !self.public
   end

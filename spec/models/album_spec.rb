@@ -55,4 +55,16 @@ RSpec.describe Album, type: :model do
     expect(album_1.permissions).to eq("Private")
     expect(album_2.permissions).to eq("Public")
   end
+
+  it "can be scoped to albums belonging to active users" do
+    album_1 = Fabricate(:album)
+    album_2 = Fabricate(:album)
+
+    user_1 = Fabricate(:user, active: false)
+    Fabricate(:album_user, user: user_1, album: album_1, owner: true)
+    binding.pry
+    expect(Album.count).to eq(2)
+    expect(Album.active.count).to eq(1)
+    expect(Album.active.first).to eq(album_2)
+  end
 end

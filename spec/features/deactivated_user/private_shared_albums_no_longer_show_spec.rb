@@ -12,13 +12,13 @@ RSpec.describe "User with private shared album is deactivated" do
     Fabricate(:album_user,
               user: active_user,
               album: album)
-
+    binding.pry
     stub_login_user(active_user)
-    visit albums_path
+    visit my_albums_path
     expect(page).to_not have_content(album.title)
 
     visit album_path(album)
-    expect(current_page).to eq(albums_path)
+    expect(current_path).to eq(albums_path)
     expect(page).to have_content("The album you are looking for belongs to an inactive user and is no longer accessible.")
   end
 end
