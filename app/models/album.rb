@@ -9,14 +9,23 @@ class Album < ApplicationRecord
   end
 
   def self.find_all_public
-    where(public: true)
+    left_outer_joins(:users).where("users.active = true").where(public: true)
   end
 
   def display_users
     users.joins(:user_profile).pluck(:username)
   end
 
+  def owner?(user)
+    !album_users.where(owner: true).where(user: user).empty?
+  end
+
+
   def permitted?(user)
     users.include?(user)
+  end
+
+  def permissions
+    public ? "Public" : "Private"
   end
 end

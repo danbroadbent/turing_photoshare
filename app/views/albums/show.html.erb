@@ -1,7 +1,8 @@
 <div class="container album">
   <div class="col-md-12">
     <h3><%= @album.title %></h3>
-    <p><%= @album.description %></p>
+    <h4><%= @album.description %></h4>
+    <h4 class="small">Permissions: <%= @album.permissions %> </h4>
     <p class="small"><%= @album.display_users.join %></p>
     <% @album.photos.each do |photo| %>
       <%= render 'shared/photo_tile', photo: photo %>
@@ -12,9 +13,11 @@
     <div class="col-md-12">
       <div class="album-button-bar btn-group">
         <% if @album.permitted?(current_user) %>
-        <%= link_to "Add Photo", new_photo_path(album_id: @album.id), class: "btn btn-default btn-sm" %>
+          <%= link_to "Add Photo", new_photo_path(album_id: @album.id), class: "btn btn-default btn-sm" %>
         <% end %>
         <%= link_to "Share Album", new_album_user_path(album_id: @album.id), class: "btn btn-default btn-sm" %>
+        <%= link_to "Download Album", album_download_path(album: @album), class: "btn btn-default btn-sm" %>
+        <%= link_to "Edit Album", edit_album_path(@album), class: "btn btn-default btn-sm" %>
         <%= render 'shared/album_delete' %>
       </div>
     </div>

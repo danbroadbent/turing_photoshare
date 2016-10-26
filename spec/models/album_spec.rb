@@ -17,6 +17,7 @@ RSpec.describe Album, type: :model do
   it "can find all public albums" do
     private_album = Fabricate(:album)
     public_album = Fabricate(:album, public: true)
+    Fabricate(:user).albums.push(private_album, public_album)
 
     expect(Album.find_all_public.count).to eq(1)
     expect(Album.find_all_public.first).to eq(public_album)
@@ -31,8 +32,8 @@ RSpec.describe Album, type: :model do
     album_user_2 = Fabricate(:album_user, user: users.last, album: album)
 
     expect(album.display_users.count).to eq(2)
-    expect(album.display_users.first).to eq(users.first.username)
-    expect(album.display_users.last).to eq(users.last.username)
+    expect(album.display_users).to include(users.first.username)
+    expect(album.display_users).to include(users.last.username)
   end
 
   it "knows if a user has editing rights" do
@@ -45,5 +46,13 @@ RSpec.describe Album, type: :model do
     expect(album.permitted?(authorized_users.first)).to eq(true)
     expect(album.permitted?(authorized_users.last)).to eq(true)
     expect(album.permitted?(unauthorized_user)).to eq(false)
+  end
+
+  it "knows if it is public or private" do
+    album_1 = Fabricate(:album, public: false)
+    album_2 = Fabricate(:album, public: true)
+
+    expect(album_1.permissions).to eq("Private")
+    expect(album_2.permissions).to eq("Public")
   end
 end

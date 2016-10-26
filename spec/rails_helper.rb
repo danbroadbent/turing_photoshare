@@ -5,6 +5,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
+
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.hook_into :webmock
@@ -19,14 +20,17 @@ Shoulda::Matchers.configure do |config|
 end
 
 def stub_login_user(user)
-  user_profile = Fabricate(:user_profile, user: user)
-  visit login_path
-  fill_in "Username", with: user.username
-  fill_in "Password", with: user.password
-  click_on "Submit"
-  expect(current_path).to eq(new_confirmation_path)
-  fill_in 'verification_code', with: user.verification_code
-  click_button "Submit"
+  VCR.use_cassette "stub login user" do
+    user_profile = Fabricate(:user_profile, user: user)
+    visit login_path
+    fill_in "Username", with: user.username
+    fill_in "Password", with: user.password
+    click_on "Submit"
+    expect(current_path).to eq(new_confirmation_path)
+    user.reload
+    fill_in 'verification_code', with: user.verification_code
+    click_button "Submit"
+  end
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
