@@ -43,4 +43,34 @@ RSpec.describe User, type: :model do
     user = Fabricate(:user)
     expect(user.status).to eq("Active")
   end
+
+  it "can return only active users" do
+    user = Fabricate(:user, active: true)
+    Fabricate(:user, active: false)
+
+    expect(User.count).to eq(2)
+    expect(User.active.count).to eq(1)
+    expect(User.active.first).to eq(user)
+  end
+
+  it "can find all shared and owned albums scoped to active users" do
+    deactive_user = Fabricate(:user, active: false)
+    active_user_1 = Fabricate(:user)
+    active_user_2 = Fabricate(:user)
+
+    album_1 = Fabricate(:album)
+    album_2 = Fabricate(:album)
+    album_3 = Fabricate(:album)
+
+    Fabricate(:album_user, user: deactive_user, album: album_1, owner: true)
+    Fabricate(:album_user, user: active_user_1, album: album_2, owner: true)
+    Fabricate(:album_user, user: active_user_2, album: album_3, owner: true)
+
+    Fabricate(:album_user, user: active_user_2, album: album_1)
+    Fabricate(:album_user, user: active_user_2, album: album_2)
+
+    expect(active_user_2.active_albums.count).to eq(2)
+    expect(active_user_2.active_albums.first).to eq(album_2)
+    expect(active_user_2.active_albums.first).to eq(album_3)
+  end
 end

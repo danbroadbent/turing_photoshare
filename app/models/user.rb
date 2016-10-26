@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   def_delegators :user_profile, :username, :phone_number, :email
 
+  scope :active, -> { where(active: true) }
+
   def self.find_by_username(username)
     profile = UserProfile.find_by(username: username) || UserProfile.new
     profile.user || User.new
@@ -40,5 +42,19 @@ class User < ApplicationRecord
 
   def status
     active ? "Active" : "Inactive"
+  end
+
+  def active_albums
+    binding.pry
+    # albums.merge(Album.active)
+    # Album.joins(:users).where("users.active = true").joins(:album_users).where("album_users.owner = true").distinct
+
+
+    # album users
+      # album id = int
+      # user id = int
+      # view = true / false
+      # own = true / false
+
   end
 end
