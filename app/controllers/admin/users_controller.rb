@@ -23,6 +23,11 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_user_path(this_user)
   end
 
+  def destroy
+    this_user.destroy
+    redirect_to admin_users_path
+  end
+
   private
 
     def this_user

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'my_albums',                to: 'my_albums#index'
   get 'album/comments/delete',    to: 'comments#destroy'
   get 'admin/albums/delete',      to: 'admin/albums#destroy'
+  get 'admin/users/delete',       to: 'admin/users#destroy'
   get 'album/download',           to: 'album/download#index'
 
 

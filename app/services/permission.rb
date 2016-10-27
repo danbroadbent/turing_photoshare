@@ -20,7 +20,7 @@ class Permission
       return true if controller == "admin" && action.in?(%w(index))
       return true if controller == "admin/albums" && action.in?(%w(index destroy))
       return true if controller == "album/download" && action.in?(%w(index))
-      return true if controller == "admin/users" && action.in?(%w(index edit show update))
+      return true if controller == "admin/users" && action.in?(%w(index edit show update destroy))
       false
     elsif user.registered?
       return true if controller == "home" && action.in?(%w(index))
