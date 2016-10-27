@@ -6,6 +6,7 @@ RSpec.feature "Logged in visits my albums path" do
     albums = Fabricate.times(2, :album)
     Fabricate(:album_user, user: user, album: albums.first, owner: true)
     Fabricate(:album_user, user: user, album: albums.last, owner: false)
+    Fabricate(:album_user, user: Fabricate(:user), album: albums.last, owner: true)
     stub_login_user(user)
 
     visit my_albums_path

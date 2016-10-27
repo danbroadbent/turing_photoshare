@@ -9,8 +9,7 @@ class Admin::AlbumsController < ApplicationController
   end
 
   private
-
-  def current_album
-    Album.find(params[:id])
-  end
+    def current_album
+      Album.find(params[:id])
+    end
 end

@@ -29,7 +29,6 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-
     def this_user
       User.find(params[:id])
     end
