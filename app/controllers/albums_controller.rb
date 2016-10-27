@@ -17,7 +17,6 @@ class AlbumsController < ApplicationController
 
   def show
     if current_user.active_albums.include?(current_album) || admin_user?
-    # if current_album.permitted?(current_user) || admin_user?
       @album = current_album
     else
       flash[:info] = "The requested page does not exist or is no longer available."
