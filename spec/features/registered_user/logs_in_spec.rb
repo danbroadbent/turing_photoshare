@@ -65,4 +65,11 @@ RSpec.feature "Registered user logs in" do
       end
     end
   end
+
+  context "after 3 bad confirmations" do
+    it "resets the confirmation code and sends a new text" do
+      visit login_path
+      
+    end
+  end
 end
