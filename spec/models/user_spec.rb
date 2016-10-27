@@ -71,6 +71,6 @@ RSpec.describe User, type: :model do
 
     expect(active_user_2.active_albums.count).to eq(2)
     expect(active_user_2.active_albums.first).to eq(album_2)
-    expect(active_user_2.active_albums.first).to eq(album_3)
+    expect(active_user_2.active_albums.last).to eq(album_3)
   end
 end

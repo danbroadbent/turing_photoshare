@@ -8,9 +8,12 @@ RSpec.describe "User with private shared album is deactivated" do
 
     album_1 = Fabricate(:album)
     album_2 = Fabricate(:album)
+    album_3 = Fabricate(:album)
 
     Fabricate(:album_user, user: deactive_user, album: album_1, owner: true)
+    Fabricate(:album_user, user: deactive_user, album: album_2, owner: false)
     Fabricate(:album_user, user: active_user_1, album: album_2, owner: true)
+    Fabricate(:album_user, user: active_user_1, album: album_3, owner: true)
 
     Fabricate(:album_user, user: active_user_2, album: album_1)
     Fabricate(:album_user, user: active_user_2, album: album_2)
@@ -22,8 +25,8 @@ RSpec.describe "User with private shared album is deactivated" do
     expect(page).to_not have_content(album_1.title)
 
     visit album_path(album_1)
-    
-    expect(current_path).to eq(my_albums_path)
-    expect(page).to have_content("The album you are looking for belongs to an inactive user and is no longer accessible.")
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("The requested page does not exist or is no longer available.")
   end
 end
