@@ -5,7 +5,7 @@ RSpec.feature "user deletes an album they own" do
       user = Fabricate(:user)
       album = Fabricate(:album)
       Fabricate(:comment, album: album, user: user)
-      Fabricate(:album_user, user: user, album: album)
+      Fabricate(:album_user, user: user, album: album, owner: true)
       stub_login_user(user)
       visit album_path(album)
 

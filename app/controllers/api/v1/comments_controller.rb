@@ -43,11 +43,11 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   private
-  def api_user
-    User.find_by(api_token: params[:api_token])
-  end
+    def api_user
+      User.find_by(api_token: params[:api_token])
+    end
 
-  def api_album
-    Album.find(params[:album_id])
-  end
+    def api_album
+      Album.find(params[:album_id])
+    end
 end

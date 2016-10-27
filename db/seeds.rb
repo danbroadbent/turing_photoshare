@@ -11,8 +11,7 @@ class Seed
     chad = Fabricate(:user, role: 1, password: "password")
     Fabricate(:user_profile,
               user: chad,
-              username: "clancey007@example.com",
-              phone_number: "8015583951")
+              username: "clancey007@example.com")
   end
 
   def generate_users
