@@ -4,7 +4,7 @@ RSpec.feature "logged in user edits album" do
   scenario "and changes permission from private to public" do
     album = Fabricate(:album)
     stub_login_user Fabricate(:user)
-    Fabricate(:album_user, album: album, user: User.first)
+    Fabricate(:album_user, album: album, user: User.first, owner: true)
 
     visit album_path(album)
     expect(current_path).to eq(album_path(album))

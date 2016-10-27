@@ -33,8 +33,14 @@ class User < ApplicationRecord
     active ? "Active" : "Inactive"
   end
 
-  private
+  def active_albums
+    Album.joins(:users)
+      .where("users.active = true and album_users.owner = true") &
+      Album.joins(:album_users)
+      .where("album_users.user_id = ?", self.id)
+  end
 
+  private
     def get_ready_to_destroy
       albums.joins(:album_users).where("album_users.owner = true").destroy_all
       album_users.destroy_all

@@ -9,7 +9,6 @@ class ConfirmationsController < ApplicationController
     if @user.verification_code == params[:verification_code]
       reset_guesses
       session[:authenticated] = true
-
       flash[:success] = "You are logged in as #{@user.username}. I hope you like pictures!"
       redirect_to user_path(@user)
     else

@@ -8,7 +8,7 @@ RSpec.feature 'user can download a zip of album photos' do
               album_id: album.id,
               user_id: user.id,
               image: File.open(File.join(Rails.root, "spec/fixtures/dummy.png")))
-    album_user = Fabricate(:album_user, user: user, album: album)
+    album_user = Fabricate(:album_user, user: user, album: album, owner: true)
     Fabricate(:user_profile, user: user)
     stub_login_user(user)
 
