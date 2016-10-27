@@ -66,10 +66,29 @@ RSpec.feature "Registered user logs in" do
     end
   end
 
-  context "after 3 bad confirmations" do
+  context "after two bad confirmations" do
     it "resets the confirmation code and sends a new text" do
-      visit login_path
-      
+      visit new_user_path
+      fill_in "Username", with: "test"
+      fill_in "Phone number", with: "5555555555"
+      fill_in "Password", with: "1234"
+      fill_in "Password confirmation", with: "1234"
+      click_button "Create New Account"
+
+      user = User.first
+      original_verification = user.verification_code
+
+      2.times do
+        fill_in 'verification_code', with: "abcdef"
+        click_button "Submit"
+        expect(page).to have_content("Verification code is incorrect.")
+      end
+
+      new_verification = user.verification_code
+      expect(original_verification).to_not eq(new_verification)
+      fill_in 'verification_code', with: new_verification
+      click_button "Submit"
+      expect(page).to have_content("You are logged in as test. I hope you like pictures!")
     end
   end
 end

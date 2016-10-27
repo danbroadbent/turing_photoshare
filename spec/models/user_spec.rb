@@ -44,4 +44,12 @@ RSpec.describe User, type: :model do
     user = Fabricate(:user)
     expect(user.status).to eq("Active")
   end
+
+  it "can incrament guesses" do
+    user = Fabricate(:user)
+    expect(user.guesses).to eq(0)
+
+    user.incrament_guesses
+    expect(user.guesses).to eq(1)
+  end
 end
