@@ -25,11 +25,6 @@ class ApplicationController < ActionController::Base
 
   def authorize!
     unless current_permission.authorized?
-# For debugging only. Remove before going to production.
-puts "\n\n****Did you update your permissions?****\n\n"
-puts "Current user role: #{current_user.role}" if current_user
-puts "Controller: #{params[:controller]} - Action: #{params[:action]}"
-
       redirect_to root_path, danger: "The page you requested is not available or does not exist."
     end
   end

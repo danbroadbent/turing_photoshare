@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:album_users) }
   it { should have_many(:albums) }
   it { should have_many(:photos) }
+  it { should have_many(:comments) }
   it { should have_one(:user_profile) }
 
   it "has a username" do

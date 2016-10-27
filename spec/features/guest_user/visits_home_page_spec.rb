@@ -17,7 +17,7 @@ RSpec.feature "Guest user visits home page" do
     expect(page).to_not have_content("Create Album")
     within ".photo_tile" do
       expect(page).to have_css("img")
-      expect(page).to have_content(public_album.photos.first.caption)
+      expect(page).to have_content(public_album.description.split()[0..3].join(" "))
     end
   end
 

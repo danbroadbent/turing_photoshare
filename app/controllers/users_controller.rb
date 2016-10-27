@@ -34,12 +34,12 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:role,
-                                 :password,
-                                 :active,
-                                 :verification_code,
-                                 :api_token)
-  end
+    def user_params
+      params.require(:user).permit(:role,
+                                   :password,
+                                   :password_confirmation,
+                                   :active,
+                                   :verification_code,
+                                   :api_token)
+    end
 end

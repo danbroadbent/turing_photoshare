@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'my_albums',                to: 'my_albums#index'
   get 'album/comments/delete',    to: 'comments#destroy'
   get 'admin/albums/delete',      to: 'admin/albums#destroy'
+  get 'admin/users/delete',       to: 'admin/users#destroy'
   get 'album/download',           to: 'album/download#index'
 
 
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
   resources :albums do
     resources :comments, only: [:create, :destroy, :edit, :update]
   end
-  resources :photos, only: [:show, :new, :create]
+  resources :photos, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :album_users, only: [:new, :create]
 
   namespace :admin do
