@@ -11,11 +11,8 @@ class AlbumsController < ApplicationController
     @album = Album.new(album_params)
     @album.users << current_user
     @album.album_users.update(owner: true)
-    if @album.save
-      redirect_to album_path(@album)
-    else
-
-    end
+    @album.save
+    redirect_to album_path(@album)
   end
 
   def show
@@ -41,11 +38,11 @@ class AlbumsController < ApplicationController
 
   private
 
-    def album_params
-      params.require(:album).permit(:title, :description, :public)
-    end
+  def album_params
+    params.require(:album).permit(:title, :description, :public)
+  end
 
-    def current_album
-      Album.find(params[:id])
-    end
+  def current_album
+    Album.find(params[:id])
+  end
 end
