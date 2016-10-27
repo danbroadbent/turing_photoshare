@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one :user_profile
 
   enum role: %w(registered admin)
-  before_validation :set_role, :set_active
+  before_validation :set_role
 
   extend Forwardable
 
@@ -22,10 +22,6 @@ class User < ApplicationRecord
 
   def set_role
     self.role ||= 0
-  end
-
-  def set_active
-    self.active ||= true
   end
 
   def admin?
@@ -45,16 +41,9 @@ class User < ApplicationRecord
   end
 
   def active_albums
-    binding.pry
-    # albums.merge(Album.active)
-    # Album.joins(:users).where("users.active = true").joins(:album_users).where("album_users.owner = true").distinct
-
-
-    # album users
-      # album id = int
-      # user id = int
-      # view = true / false
-      # own = true / false
-
+    Album.joins(:users)
+      .where("users.active = true and album_users.owner = true") &
+      Album.joins(:album_users)
+      .where("album_users.user_id = ?", self.id)
   end
 end

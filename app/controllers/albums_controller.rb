@@ -10,16 +10,19 @@ class AlbumsController < ApplicationController
   def create
     @album = Album.new(album_params)
     @album.users << current_user
-    if @album.save
-      redirect_to album_path(@album)
-    else
-
-    end
+    @album.album_users.update(owner: true)
+    @album.save
+    redirect_to album_path(@album)
   end
 
   def show
-    redirect_to root_path unless current_album.permitted?(current_user) || admin_user?
-    @album = current_album
+    if current_user.active_albums.include?(current_album) || admin_user?
+    # if current_album.permitted?(current_user) || admin_user?
+      @album = current_album
+    else
+      flash[:info] = "The requested page does not exist or is no longer available."
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -39,7 +42,6 @@ class AlbumsController < ApplicationController
   end
 
   private
-
     def album_params
       params.require(:album).permit(:title, :description, :public)
     end

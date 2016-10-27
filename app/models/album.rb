@@ -20,7 +20,8 @@ class Album < ApplicationRecord
   end
 
   def permitted?(user)
-    users.include?(user)
+    # user.active_albums.include?(self)
+    users.include?(user)# && users.where("album_users.owner = true").first.active
   end
 
   def permissions
