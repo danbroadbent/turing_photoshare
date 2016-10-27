@@ -8,10 +8,10 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    @album = Album.new(album_params)
+    @album = Album.create(album_params)
     @album.users << current_user
     @album.album_users.update(owner: true)
-    @album.save
+    flash[:success] = "Enjoy your new photo album!"
     redirect_to album_path(@album)
   end
 
