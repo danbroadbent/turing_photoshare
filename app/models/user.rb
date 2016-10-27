@@ -13,8 +13,6 @@ class User < ApplicationRecord
 
   def_delegators :user_profile, :username, :phone_number, :email
 
-  scope :active, -> { where(active: true) }
-
   def self.find_by_username(username)
     profile = UserProfile.find_by(username: username) || UserProfile.new
     profile.user || User.new

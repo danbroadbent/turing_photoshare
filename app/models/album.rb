@@ -4,9 +4,6 @@ class Album < ApplicationRecord
   has_many :album_users, dependent: :destroy
   has_many :users, through: :album_users
 
-  scope :active, -> { joins(:album_users).merge(AlbumUser.owned_active) }
-
-
   def private?
     !self.public
   end
@@ -20,8 +17,7 @@ class Album < ApplicationRecord
   end
 
   def permitted?(user)
-    # user.active_albums.include?(self)
-    users.include?(user)# && users.where("album_users.owner = true").first.active
+    users.include?(user)
   end
 
   def permissions
