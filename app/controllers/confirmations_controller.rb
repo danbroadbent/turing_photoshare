@@ -12,7 +12,7 @@ class ConfirmationsController < ApplicationController
       flash[:notice] = "You are logged in as #{@user.username}. I hope you like pictures!!!"
       redirect_to user_path(@user)
     else
-      flash.now[:error] = "Verification code is incorrect. Chase Said so!"
+      flash.now[:error] = "Verification code is incorrect."
       render :new
     end
   end
