@@ -4,24 +4,14 @@ class PhotosController < ApplicationController
   end
 
   def create
-    gcloud = Google::Cloud.new(ENV['GOOGLE_CLOUD_KEYFILE_JSON'])
-    storage = gcloud.storage
-    bucket = storage.bucket 'turing-photoshare'
-    file_url = params["photo"]["image"].tempfile.path
-
-    bucket.create_file file_url, Time.now.getutc.to_s
-
+    GoogleStorageService.upload_photo(params)
     @photo = Photo.new
     @photo.album_id = params[:photo][:album_id]
     @photo.caption = params[:photo][:caption]
     @photo.image = params[:photo][:image]
-# change this after authorization
-    @photo.user_id = current_user.id #? current_user.id : User.last.id
-    @photo.save!
+    @photo.user_id = current_user.id
+    @photo.save
     redirect_to album_path(@photo.album)
-    # else
-    #   redirect_to root
-    # end
 
   end
 

@@ -9,7 +9,10 @@ class Seed
   def generate_admin
     puts "Generating administrator."
     chad = Fabricate(:user, role: 1, password: "password")
-    Fabricate(:user_profile, user: chad, username: "clancey007@example.com")
+    Fabricate(:user_profile,
+              user: chad,
+              username: "clancey007@example.com",
+              phone_number: "8015583951")
   end
 
   def generate_users
@@ -21,6 +24,7 @@ class Seed
   def generate_albums
     puts "Populating albums table"
     User.all.each do |user|
+      Fabricate(:user_profile, user: user, username: "user#{user.id}")
       user.albums << Fabricate.times(5, :album)
     end
     puts "#{Album.count} albums have been added to the database."

@@ -23,16 +23,10 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_user_path(this_user)
   end
 
-  # def destroy
-  #   current_album.destroy
-  #   redirect_to admin_albums_path
-  # end
-  #
-  # private
-  #
-  # def current_album
-  #   Album.find(params[:id])
-  # end
+  def destroy
+    this_user.destroy
+    redirect_to admin_users_path
+  end
 
   private
 
