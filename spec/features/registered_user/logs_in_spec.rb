@@ -65,4 +65,34 @@ RSpec.feature "Registered user logs in" do
       end
     end
   end
+
+  def supply_incorrect_code
+    fill_in 'verification_code', with: "abcdef"
+    click_button "Submit"
+  end
+
+  context "after two bad confirmations" do
+    it "resets the confirmation code and sends a new text" do
+      visit new_user_path
+      fill_in "Username", with: "test"
+      fill_in "Phone number", with: "6467530657"
+      fill_in "Password", with: "1234"
+      fill_in "Password confirmation", with: "1234"
+      click_button "Create New Account"
+
+      original_verification = User.first.verification_code
+
+      supply_incorrect_code
+      expect(page).to have_content("Verification code is incorrect.")
+
+      supply_incorrect_code
+      expect(page).to have_content("A new verification_code has been sent to your cell.")
+
+      expect(original_verification).to_not eq(User.first.verification_code)
+
+      fill_in 'verification_code', with: User.first.verification_code
+      click_button "Submit"
+      expect(page).to have_content("You are logged in as test. I hope you like pictures!")
+    end
+  end
 end

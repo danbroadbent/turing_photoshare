@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       username: params[:user][:user_profile][:username],
       phone_number: params[:user][:user_profile][:phone_number])
     if @user.save && @user_profile.save
-      session[:user_id] = @user.id
+      set_session
       ConfirmationSender.send_confirmation_to(@user)
       redirect_to new_confirmation_path
     else
@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   end
 
   private
+
     def user_params
       params.require(:user).permit(:role,
                                    :password,
@@ -42,5 +43,10 @@ class UsersController < ApplicationController
                                    :active,
                                    :verification_code,
                                    :api_token)
+    end
+
+    def set_session
+      session[:user_id] = @user.id
+      session[:guesses] = 0
     end
 end
