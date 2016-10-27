@@ -11,8 +11,8 @@ class PhotosController < ApplicationController
     @photo.image = params[:photo][:image]
     @photo.user_id = current_user.id
     @photo.save
+    flash[:success] = "Your photo has been uploaded."
     redirect_to album_path(@photo.album)
-
   end
 
   def edit

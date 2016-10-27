@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       ConfirmationSender.send_confirmation_to(@user)
       redirect_to new_confirmation_path
     else
+      flash[:info] = "Oops. Something didn't look right. Please try again."
       render :new
     end
   end
